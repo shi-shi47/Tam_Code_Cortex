@@ -16,3 +16,12 @@
 - [x] Add a song-nomination poll section with selectable options, vote feedback, and local persistence.
 - [x] Run typecheck/build and verify desktop/mobile rendering plus the main interactions.
 - [x] Save and deliver the updated checkpoint.
+
+## Dark mode and brand asset update
+
+- [x] Inspect the provided TAM logo archive without re-viewing the attached Code cortex image.
+- [x] Copy the provided Code cortex image and TAM logo assets into webdev static asset storage.
+- [x] Shift the visual tokens and section surfaces toward a stronger dark-mode treatment.
+- [x] Place the Code cortex and TAM logos in the header, menu, hero, and footer as appropriate.
+- [x] Run typecheck/build and verify desktop/mobile rendering plus existing interactions.
+- [x] Save and deliver the updated checkpoint.

@@ -31,9 +31,10 @@ import {
 } from "lucide-react";
 
 const sirenTrack = "/manus-storage/code-cortex-siren-ambience_89aed583.wav";
+const codeCortexLogo = "/manus-storage/code-cortex-logo-transparent_52bd5849.png";
+const tamWhiteLogo = "/manus-storage/tam-white-logo_5a224019.png";
 const orbitArt = "/manus-storage/devjams-orbit-sphere_1b14088e.png";
 const trackArt = "/manus-storage/devjams-track-objects_36355203.png";
-const brandMark = "/manus-storage/devjams-mark_be795ed8.png";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -134,7 +135,7 @@ type TrackColor = (typeof tracks)[number]["color"];
 function Mark({ compact = false }: { compact?: boolean }) {
   return (
     <a className={compact ? "brand brand--compact" : "brand"} href="#home" aria-label="Code cortex home">
-      <img src={brandMark} alt="" className="brand__mark" />
+      <img src={tamWhiteLogo} alt="TAM" className="brand__tam-logo" />
       <span className="brand__copy">
         <span className="brand__top">TAM-VIT</span>
         <span className="brand__bottom">CODE CORTEX</span>
@@ -330,6 +331,7 @@ export default function Home() {
             <span>TAM-VIT / INDIA</span>
           </div>
           <div className="hero__copy page-pad">
+            <div className="hero__official-logo"><img src={codeCortexLogo} alt="Code cortex 3.0" /><span>OFFICIAL EVENT MARK / TAM-VIT</span></div>
             <p className="eyebrow eyebrow--bright"><span className="eyebrow__pulse" /> 30 HOURS / ONE IDEA / ZERO LIMITS</p>
             <Wordmark />
             <div className="hero__headline-row">
@@ -483,7 +485,7 @@ export default function Home() {
 
       <footer id="contact" className="footer section-dark page-pad" data-reveal>
         <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
-        <div className="footer__bottom"><Mark compact /><div className="footer__socials"><a href="#home" aria-label="Medium"><Code2 size={18} /></a><a href="#home" aria-label="Instagram"><Instagram size={18} /></a><a href="#home" aria-label="X Twitter"><Github size={18} /></a><a href="#home" aria-label="LinkedIn"><Linkedin size={18} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
+        <div className="footer__bottom"><div className="footer__brand-lockup"><Mark compact /><img src={codeCortexLogo} alt="Code cortex 3.0" /></div><div className="footer__socials"><a href="#home" aria-label="Medium"><Code2 size={18} /></a><a href="#home" aria-label="Instagram"><Instagram size={18} /></a><a href="#home" aria-label="X Twitter"><Github size={18} /></a><a href="#home" aria-label="LinkedIn"><Linkedin size={18} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
       </footer>
     </div>
   );
