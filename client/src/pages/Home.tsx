@@ -1,5 +1,5 @@
 // Design direction: playful digital maximalism — midnight navy, electric cyan, cobalt, coral, citrus, oversized display type, layered objects, and tactile controls.
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import {
   ArrowLeft,
@@ -22,11 +22,15 @@ import {
   Linkedin,
   Mail,
   Menu,
+  Music2,
   Phone,
   Sparkles,
+  Volume2,
+  VolumeX,
   X,
 } from "lucide-react";
 
+const sirenTrack = "/manus-storage/code-cortex-siren-ambience_89aed583.wav";
 const orbitArt = "/manus-storage/devjams-orbit-sphere_1b14088e.png";
 const trackArt = "/manus-storage/devjams-track-objects_36355203.png";
 const brandMark = "/manus-storage/devjams-mark_be795ed8.png";
@@ -35,6 +39,7 @@ const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Tracks", href: "#tracks" },
+  { label: "Nominate", href: "#nominate" },
   { label: "Gallery", href: "#gallery" },
   { label: "Sponsors", href: "#sponsors" },
   { label: "FAQs", href: "#faqs" },
@@ -104,9 +109,16 @@ const tracks = [
   },
 ];
 
+const nominationOptions = [
+  { id: "deep-water", title: "Deep Water Drift", note: "Slow synths, wide reverb, midnight focus.", votes: 86, color: "cyan" },
+  { id: "neon-ruins", title: "Neon Ruins", note: "A pulse for late-night builds and brave demos.", votes: 64, color: "coral" },
+  { id: "sunrise-loop", title: "Sunrise Loop", note: "Warm, hopeful, and ready for the final stretch.", votes: 51, color: "lime" },
+  { id: "wild-card", title: "Wild Card", note: "Nominate your own song in the community chat.", votes: 39, color: "yellow" },
+];
+
 const faqs = {
   General: [
-    ["What is DevJams?", "DevJams is GDG VIT’s flagship 48-hour hackathon: a focused weekend to explore an idea, find your people, and leave with something that works."],
+    ["What is Code cortex?", "Code cortex is TAM-VIT’s flagship 30-hour hackathon: a focused sprint to explore an idea, find your people, and leave with something that works."],
     ["Who can participate?", "Students and early builders are welcome. Form a team, pick a direction, and bring the curiosity — we will help with the rest."],
     ["Do I need a finished idea?", "Not at all. A rough hunch is enough. The tracks, mentors, and community are there to help you turn a spark into a buildable plan."],
   ],
@@ -193,11 +205,38 @@ export default function Home() {
   const [faqMode, setFaqMode] = useState<keyof typeof faqs>("General");
   const [faqOpen, setFaqOpen] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const [selectedNomination, setSelectedNomination] = useState<string | null>(null);
+  const [hasVoted, setHasVoted] = useState(false);
+  const [nominationVotes, setNominationVotes] = useState(() => Object.fromEntries(nominationOptions.map((option) => [option.id, option.votes])) as Record<string, number>);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const savedNomination = window.localStorage.getItem("code-cortex-song-nomination");
+    if (savedNomination) {
+      setSelectedNomination(savedNomination);
+      setHasVoted(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealTargets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -214,6 +253,30 @@ export default function Home() {
     setTrackIndex((current) => (current + direction + tracks.length) % tracks.length);
   };
 
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (musicPlaying) {
+      audio.pause();
+      setMusicPlaying(false);
+      return;
+    }
+    try {
+      await audio.play();
+      setMusicPlaying(true);
+    } catch {
+      setMusicPlaying(false);
+    }
+  };
+
+  const voteForSong = (songId: string) => {
+    if (hasVoted) return;
+    setSelectedNomination(songId);
+    setHasVoted(true);
+    setNominationVotes((current) => ({ ...current, [songId]: (current[songId] ?? 0) + 1 }));
+    window.localStorage.setItem("code-cortex-song-nomination", songId);
+  };
+
   const jumpTo = (href: string) => {
     setMenuOpen(false);
     window.setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" }), 80);
@@ -221,12 +284,19 @@ export default function Home() {
 
   return (
     <div className="site-shell">
+      <audio ref={audioRef} src={sirenTrack} loop preload="metadata" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} />
       <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
         <Mark />
-        <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+        <div className="header-actions">
+          <button className={`music-toggle ${musicPlaying ? "music-toggle--active" : ""}`} onClick={toggleMusic} aria-pressed={musicPlaying} aria-label={musicPlaying ? "Pause event music" : "Play event music"}>
+            <span className="music-toggle__icon">{musicPlaying ? <Volume2 size={17} /> : <VolumeX size={17} />}</span>
+            <span className="music-toggle__copy"><span>{musicPlaying ? "ON AIR" : "PLAY SOUND"}</span><small>ORIGINAL SIREN MIX</small></span>
+          </button>
+          <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
           <span className="menu-trigger__word">MENU</span>
-          <span className="menu-trigger__icon"><Menu size={22} strokeWidth={1.8} /></span>
-        </button>
+            <span className="menu-trigger__icon"><Menu size={22} strokeWidth={1.8} /></span>
+          </button>
+        </div>
       </header>
 
       <div className={`menu-panel ${menuOpen ? "menu-panel--open" : ""}`} aria-hidden={!menuOpen}>
@@ -278,11 +348,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="about section-light page-pad">
+        <section id="about" className="about section-light page-pad" data-reveal>
           <div className="about__intro">
             <SectionLabel number="01">ABOUT THE JAM</SectionLabel>
             <h2>The build<br /><span>starts here.</span></h2>
-            <p className="lead-copy">DevJams is the flagship hackathon organized by GDG-VIT — a 48-hour intensive coding event designed to push the boundaries of innovation and develop practical problem-solving skills.</p>
+            <p className="lead-copy">Code cortex is the flagship hackathon organized by TAM-VIT — a 30-hour intensive coding event designed to push the boundaries of innovation and develop practical problem-solving skills.</p>
             <a className="text-link" href="#tracks" onClick={(event) => { event.preventDefault(); jumpTo("#tracks"); }}>Find your track <ArrowRight size={18} /></a>
           </div>
           <div className="about__visual">
@@ -300,7 +370,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="manifesto section-dark page-pad">
+        <section className="manifesto section-dark page-pad" data-reveal>
           <div className="manifesto__side"><GridDoodle /></div>
           <div className="manifesto__content">
             <SectionLabel number="02">WHO WE ARE</SectionLabel>
@@ -317,7 +387,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="duo-story page-pad">
+        <section className="duo-story page-pad" data-reveal>
           <article className="duo-card duo-card--vit">
             <div className="duo-card__top"><SectionLabel number="03">ABOUT VIT</SectionLabel><Globe size={24} /></div>
             <h3>A campus<br />with <em>range.</em></h3>
@@ -332,7 +402,7 @@ export default function Home() {
           </article>
         </section>
 
-        <section id="tracks" className="tracks section-blue page-pad">
+        <section id="tracks" className="tracks section-blue page-pad" data-reveal>
           <div className="tracks__header">
             <SectionLabel number="05">PICK A DIRECTION</SectionLabel>
             <div className="tracks__arrows"><button onClick={() => moveTrack(-1)} aria-label="Previous track"><ChevronLeft /></button><button onClick={() => moveTrack(1)} aria-label="Next track"><ChevronRight /></button></div>
@@ -358,18 +428,40 @@ export default function Home() {
           <div className="tracks__dots">{tracks.map((track, index) => <button key={track.name} className={index === trackIndex ? "is-active" : ""} onClick={() => setTrackIndex(index)} aria-label={`Go to track ${index + 1}`} />)}</div>
         </section>
 
-        <section id="gallery" className="events section-light page-pad">
-          <div className="events__header"><SectionLabel number="06">BEFORE THE JAM</SectionLabel><span className="events__header-note">A LITTLE ARCHIVE / BIG ENERGY</span></div>
+        <section id="nominate" className="nominate section-dark page-pad" data-reveal>
+          <div className="nominate__header"><SectionLabel number="06">THE IN-BETWEEN SET</SectionLabel><span className="nominate__live"><span /> LIVE NOMINATION</span></div>
+          <div className="nominate__title-row"><h2>Pick the next<br /><span>soundtrack.</span></h2><div><p>What should carry us through the next build sprint? Vote for one mood. The room gets the final call when the playlist changes.</p><p className="nominate__note"><Music2 size={16} /> Voting is saved on this device.</p></div></div>
+          <div className="nominate__grid">
+            {nominationOptions.map((option) => {
+              const totalVotes = Object.values(nominationVotes).reduce((sum, value) => sum + value, 0);
+              const percent = Math.round((nominationVotes[option.id] / totalVotes) * 100);
+              const isSelected = selectedNomination === option.id;
+              return (
+                <button key={option.id} className={`nomination-card nomination-card--${option.color} ${isSelected ? "nomination-card--selected" : ""}`} onClick={() => voteForSong(option.id)} disabled={hasVoted} aria-pressed={isSelected}>
+                  <span className="nomination-card__top"><span>0{nominationOptions.indexOf(option) + 1}</span><span>{isSelected ? "YOUR PICK" : "NOMINATE"}</span></span>
+                  <span className="nomination-card__title">{option.title}</span>
+                  <span className="nomination-card__note">{option.note}</span>
+                  <span className="nomination-card__bar"><span style={{ width: `${percent}%` }} /></span>
+                  <span className="nomination-card__bottom"><span>{nominationVotes[option.id]} votes</span><strong>{percent}%</strong></span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="nominate__footer"><span>{hasVoted ? "Your nomination is locked in. Let the room decide." : "Choose one to cast your vote."}</span><span>04 OPTIONS / 01 CHOICE</span></div>
+        </section>
+
+        <section id="gallery" className="events section-light page-pad" data-reveal>
+          <div className="events__header"><SectionLabel number="07">BEFORE THE JAM</SectionLabel><span className="events__header-note">A LITTLE ARCHIVE / BIG ENERGY</span></div>
           <div className="events__title-row"><h2>We’ve been<br /><span>busy.</span></h2><p>Three events. Hundreds of ideas. A growing collection of proof that the most interesting work starts before anybody knows what to call it.</p></div>
           <div className="event-grid">
             <article className="event-card event-card--triangle"><div className="event-card__shape event-card__shape--triangle">△</div><div className="event-card__meta"><span>2026 / 36 HOURS</span><ArrowUpRight size={19} /></div><h3>Women<br />Techies’26</h3><p>A women-centric hackathon fostering inclusivity, collaboration, and innovation.</p></article>
             <article className="event-card event-card--circle"><div className="event-card__shape event-card__shape--circle">◎</div><div className="event-card__meta"><span>2026 / 24 HOURS</span><ArrowUpRight size={19} /></div><h3>Hexathon’26</h3><p>A beginner-friendly designathon where creativity meets problem-solving.</p></article>
-            <article className="event-card event-card--flower"><div className="event-card__shape event-card__shape--flower">✽</div><div className="event-card__meta"><span>2025 / EDITION 08</span><ArrowUpRight size={19} /></div><h3>DevJams’25</h3><p>3,500+ registrations. 750+ shortlisted participants. One wildly imaginative weekend.</p></article>
+            <article className="event-card event-card--flower"><div className="event-card__shape event-card__shape--flower">✽</div><div className="event-card__meta"><span>2025 / EDITION 08</span><ArrowUpRight size={19} /></div><h3>Code cortex’25</h3><p>3,500+ registrations. 750+ shortlisted participants. One wildly imaginative weekend.</p></article>
           </div>
         </section>
 
-        <section id="sponsors" className="sponsors section-dark page-pad">
-          <div className="sponsors__header"><SectionLabel number="07">POWERED BY</SectionLabel><span>THANK YOU, INTERNET</span></div>
+        <section id="sponsors" className="sponsors section-dark page-pad" data-reveal>
+          <div className="sponsors__header"><SectionLabel number="08">POWERED BY</SectionLabel><span>THANK YOU, INTERNET</span></div>
           <div className="sponsors__title-row"><h2>Good ideas<br /><span>need friends.</span></h2><p>We are grateful to the teams that make room for new builders, new questions, and the occasional delightfully over-engineered side project.</p></div>
           <div className="sponsor-grid">
             <a className="sponsor-card sponsor-card--diamond" href="https://reka.ai/" target="_blank" rel="noreferrer"><span className="sponsor-card__rank">DIAMOND</span><span className="sponsor-card__name">REKA<span className="sponsor-card__spark">✦</span></span><span className="sponsor-card__arrow"><ArrowUpRight /></span></a>
@@ -379,8 +471,8 @@ export default function Home() {
           <div className="sponsors__sun"><span>THE<br />SUN IS<br />ON.</span></div>
         </section>
 
-        <section id="faqs" className="faq section-light page-pad">
-          <div className="faq__side"><SectionLabel number="08">NO SILLY QUESTIONS</SectionLabel><h2>Let’s break<br /><span>it down.</span></h2><p>Still curious? That is a good sign. Pick a tab and find the practical bits.</p><div className="faq__doodle"><span>?</span><span>!</span><span>↗</span></div></div>
+        <section id="faqs" className="faq section-light page-pad" data-reveal>
+          <div className="faq__side"><SectionLabel number="09">NO SILLY QUESTIONS</SectionLabel><h2>Let’s break<br /><span>it down.</span></h2><p>Still curious? That is a good sign. Pick a tab and find the practical bits.</p><div className="faq__doodle"><span>?</span><span>!</span><span>↗</span></div></div>
           <div className="faq__main">
             <div className="faq__tabs">{(Object.keys(faqs) as Array<keyof typeof faqs>).map((mode) => <button key={mode} className={faqMode === mode ? "is-active" : ""} onClick={() => { setFaqMode(mode); setFaqOpen(0); }}>{mode}</button>)}</div>
             <div className="faq__list">{faqItems.map(([question, answer], index) => <div className={`faq-item ${faqOpen === index ? "faq-item--open" : ""}`} key={question}><button onClick={() => setFaqOpen(faqOpen === index ? -1 : index)} aria-expanded={faqOpen === index}><span>0{index + 1}</span><strong>{question}</strong><ChevronDown size={21} /></button><div className="faq-item__answer"><p>{answer}</p></div></div>)}</div>
@@ -389,8 +481,8 @@ export default function Home() {
         </section>
       </main>
 
-      <footer id="contact" className="footer section-dark page-pad">
-        <div className="footer__main"><div className="footer__statement"><SectionLabel number="09">SAY HELLO</SectionLabel><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
+      <footer id="contact" className="footer section-dark page-pad" data-reveal>
+        <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
         <div className="footer__bottom"><Mark compact /><div className="footer__socials"><a href="#home" aria-label="Medium"><Code2 size={18} /></a><a href="#home" aria-label="Instagram"><Instagram size={18} /></a><a href="#home" aria-label="X Twitter"><Github size={18} /></a><a href="#home" aria-label="LinkedIn"><Linkedin size={18} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
       </footer>
     </div>
