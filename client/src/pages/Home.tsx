@@ -27,7 +27,6 @@ import {
   X,
 } from "lucide-react";
 
-const heroArt = "/manus-storage/devjams-hero-dino_78afe90c.png";
 const orbitArt = "/manus-storage/devjams-orbit-sphere_1b14088e.png";
 const trackArt = "/manus-storage/devjams-track-objects_36355203.png";
 const brandMark = "/manus-storage/devjams-mark_be795ed8.png";
@@ -122,11 +121,11 @@ type TrackColor = (typeof tracks)[number]["color"];
 
 function Mark({ compact = false }: { compact?: boolean }) {
   return (
-    <a className={compact ? "brand brand--compact" : "brand"} href="#home" aria-label="DevJams home">
+    <a className={compact ? "brand brand--compact" : "brand"} href="#home" aria-label="Code cortex home">
       <img src={brandMark} alt="" className="brand__mark" />
       <span className="brand__copy">
-        <span className="brand__top">GDG ON CAMPUS</span>
-        <span className="brand__bottom">VIT VELLORE</span>
+        <span className="brand__top">TAM-VIT</span>
+        <span className="brand__bottom">CODE CORTEX</span>
       </span>
     </a>
   );
@@ -144,19 +143,20 @@ function SectionLabel({ number, children }: { number: string; children: ReactNod
 
 function Wordmark() {
   return (
-    <div className="wordmark" aria-label="DevJams 26">
+    <div className="wordmark" aria-label="Code cortex">
       <div className="wordmark__line">
-        <span className="wordmark__char wordmark__char--d">D</span>
-        <span className="wordmark__char wordmark__char--e">e</span>
-        <span className="wordmark__char wordmark__char--v">v</span>
+        <span className="wordmark__char wordmark__char--d">C</span>
+        <span className="wordmark__char wordmark__char--e">o</span>
+        <span className="wordmark__char wordmark__char--v">d</span>
+        <span className="wordmark__char wordmark__char--j">e</span>
       </div>
       <div className="wordmark__line wordmark__line--offset">
-        <span className="wordmark__char wordmark__char--j">J</span>
-        <span className="wordmark__char wordmark__char--a">a</span>
-        <span className="wordmark__char wordmark__char--m">m</span>
-        <span className="wordmark__char wordmark__char--s">s</span>
-        <span className="wordmark__apostrophe">’</span>
-        <span className="wordmark__year">26</span>
+        <span className="wordmark__char wordmark__char--a">c</span>
+        <span className="wordmark__char wordmark__char--m">o</span>
+        <span className="wordmark__char wordmark__char--s">r</span>
+        <span className="wordmark__char wordmark__char--d">t</span>
+        <span className="wordmark__char wordmark__char--e">e</span>
+        <span className="wordmark__char wordmark__char--v">x</span>
       </div>
     </div>
   );
@@ -237,7 +237,7 @@ export default function Home() {
           </button>
         </div>
         <div className="menu-panel__body">
-          <span className="menu-panel__side-note">NAV / DEVJAMS ’26</span>
+          <span className="menu-panel__side-note">NAV / CODE CORTEX</span>
           <nav className="menu-panel__nav">
             {navItems.map((item, index) => (
               <a href={item.href} key={item.href} onClick={(event) => { event.preventDefault(); jumpTo(item.href); }}>
@@ -247,9 +247,8 @@ export default function Home() {
               </a>
             ))}
           </nav>
-          <div className="menu-panel__dino"><img src={heroArt} alt="" /></div>
         </div>
-        <div className="menu-panel__footer"><span>48 HOURS / ONE BIG IDEA</span><span>GDG-VIT · 2026</span></div>
+        <div className="menu-panel__footer"><span>30 HOURS / ONE BIG IDEA</span><span>TAM-VIT · 2026</span></div>
       </div>
 
       <main>
@@ -257,26 +256,25 @@ export default function Home() {
           <div className="hero__noise" />
           <div className="hero__grid" />
           <div className="hero__topline page-pad">
-            <span>GOOGLE DEVELOPER GROUPS</span>
-            <span>VIT VELLORE / INDIA</span>
+            <span>TAM-VIT</span>
+            <span>TAM-VIT / INDIA</span>
           </div>
           <div className="hero__copy page-pad">
-            <p className="eyebrow eyebrow--bright"><span className="eyebrow__pulse" /> 48 HOUR HACKATHON / 2026</p>
+            <p className="eyebrow eyebrow--bright"><span className="eyebrow__pulse" /> 30 HOURS / ONE IDEA / ZERO LIMITS</p>
             <Wordmark />
             <div className="hero__headline-row">
-              <h1>Wham bam,<br /><em>let’s DevJam.</em></h1>
+              <h1>30 Hours.<br /><em>One Idea.<br />Zero Limits.</em></h1>
               <a className="round-cta" href="#contact" onClick={(event) => { event.preventDefault(); jumpTo("#contact"); }}>
                 <span>Idea<br />Submission</span><ArrowUpRight size={22} />
               </a>
             </div>
           </div>
-          <div className="hero__art"><img src={heroArt} alt="Playful dinosaur illustration" /></div>
           <div className="hero__orb hero__orb--one" />
           <div className="hero__orb hero__orb--two" />
           <div className="hero__stamp"><span>MAKE</span><span>IT</span><span>WEIRD</span></div>
           <div className="hero__bottom page-pad">
             <a className="scroll-cue" href="#about"><span className="scroll-cue__line" /> Scroll to explore</a>
-            <span className="hero__location">// No boring builds allowed</span>
+            <span className="hero__location">// 30 HOURS / ONE IDEA / ZERO LIMITS</span>
           </div>
         </section>
 
@@ -313,7 +311,7 @@ export default function Home() {
               <div>
                 <p>Fueled by curiosity and a bit of chaos, we are a community of coders who push limits, designers who bring ideas to life, and managers who turn vision into reality.</p>
                 <p>We make crazy things that matter. Then we make them stranger, sharper, and ready for the real world.</p>
-                <span className="manifesto__signature">GDG VIT / 2026</span>
+                <span className="manifesto__signature">TAM-VIT / 2026</span>
               </div>
             </div>
           </div>
@@ -327,7 +325,7 @@ export default function Home() {
             <span className="duo-card__footer">12°58′N / 79°09′E <ArrowUpRight size={18} /></span>
           </article>
           <article className="duo-card duo-card--gdg">
-            <div className="duo-card__top"><SectionLabel number="04">ABOUT GDG</SectionLabel><Cpu size={24} /></div>
+            <div className="duo-card__top"><SectionLabel number="04">ABOUT TAM-VIT</SectionLabel><Cpu size={24} /></div>
             <h3>Build<br /><em>together.</em></h3>
             <p>People with different tabs open in their heads, making room for one another at the same table. That is the whole point.</p>
             <span className="duo-card__footer">COMMUNITY / ALWAYS OPEN <ArrowUpRight size={18} /></span>
@@ -393,7 +391,7 @@ export default function Home() {
 
       <footer id="contact" className="footer section-dark page-pad">
         <div className="footer__main"><div className="footer__statement"><SectionLabel number="09">SAY HELLO</SectionLabel><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
-        <div className="footer__bottom"><Mark compact /><div className="footer__socials"><a href="#home" aria-label="Medium"><Code2 size={18} /></a><a href="#home" aria-label="Instagram"><Instagram size={18} /></a><a href="#home" aria-label="X Twitter"><Github size={18} /></a><a href="#home" aria-label="LinkedIn"><Linkedin size={18} /></a></div><span className="footer__legal">© 2026 GDG VIT / BUILT WITH TOO MUCH COFFEE</span></div>
+        <div className="footer__bottom"><Mark compact /><div className="footer__socials"><a href="#home" aria-label="Medium"><Code2 size={18} /></a><a href="#home" aria-label="Instagram"><Instagram size={18} /></a><a href="#home" aria-label="X Twitter"><Github size={18} /></a><a href="#home" aria-label="LinkedIn"><Linkedin size={18} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
       </footer>
     </div>
   );

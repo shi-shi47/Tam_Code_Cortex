@@ -1,4 +1,4 @@
-// Design direction: playful digital maximalism with a midnight GDG-inspired canvas, oversized illustrated typography, and tactile interactions.
+// Design direction: playful digital maximalism with a midnight TAM-VIT canvas, oversized illustrated typography, and tactile interactions.
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
