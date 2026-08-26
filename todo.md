@@ -32,3 +32,10 @@
 - [x] Replace the existing track data with Finance, Medicine & Healthcare, Drone Tech & Aviation, Security, and Open Innovation.
 - [x] Verify carousel controls, responsive track layout, and playback state labels.
 - [x] Save and deliver the updated checkpoint.
+
+## Submission and auth cleanup
+
+- [x] Find all Idea Submission, sign-in, and sign-up references in the frontend.
+- [x] Remove the submission CTA and any related authentication prompts without leaving dead-end navigation.
+- [x] Run typecheck/build and verify desktop/mobile layout and page copy.
+- [x] Save and deliver the updated checkpoint.

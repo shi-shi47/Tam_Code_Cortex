@@ -116,11 +116,6 @@ const faqs = {
     ["Who can participate?", "Students and early builders are welcome. Form a team, pick a direction, and bring the curiosity — we will help with the rest."],
     ["Do I need a finished idea?", "Not at all. A rough hunch is enough. The tracks, mentors, and community are there to help you turn a spark into a buildable plan."],
   ],
-  Registration: [
-    ["How do I submit an idea?", "Use the Idea Submission button above to enter the participant portal. Tell us what you want to build, who it helps, and why this is the weekend to make it real."],
-    ["Can I join without a team?", "Yes. Register solo and use the community channels to meet other builders looking for a co-conspirator."],
-    ["What should I bring?", "Bring your laptop, charger, student ID, comfortable clothes, and the one idea you keep returning to."],
-  ],
 };
 
 type TrackColor = (typeof tracks)[number]["color"];
@@ -329,8 +324,8 @@ export default function Home() {
             <Wordmark />
             <div className="hero__headline-row">
               <h1>30 Hours.<br /><em>One Idea.<br />Zero Limits.</em></h1>
-              <a className="round-cta" href="#contact" onClick={(event) => { event.preventDefault(); jumpTo("#contact"); }}>
-                <span>Idea<br />Submission</span><ArrowUpRight size={22} />
+              <a className="round-cta" href="#tracks" onClick={(event) => { event.preventDefault(); jumpTo("#tracks"); }}>
+                <span>Explore<br />Tracks</span> <ArrowUpRight size={22} />
               </a>
             </div>
           </div>
