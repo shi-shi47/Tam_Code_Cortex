@@ -17,6 +17,7 @@ import {
   ExternalLink,
   Github,
   Globe,
+  HeartPulse,
   Instagram,
   Layers,
   Linkedin,
@@ -24,6 +25,8 @@ import {
   Menu,
   Music2,
   Phone,
+  Plane,
+  ShieldCheck,
   Sparkles,
   Volume2,
   VolumeX,
@@ -49,44 +52,44 @@ const navItems = [
 
 const tracks = [
   {
-    name: "Reka AI/ML",
-    sponsor: "Sponsored",
+    name: "Finance",
+    sponsor: "Open track",
     eyebrow: "Track 01",
     description:
-      "Build a thoughtful machine that sees the useful pattern hiding in plain sight. Ship an AI product that feels human, helpful, and a little unexpected.",
-    color: "cyan",
-    icon: Bot,
-    glyph: "AI",
-  },
-  {
-    name: "AR / VR",
-    sponsor: "Open track",
-    eyebrow: "Track 02",
-    description:
-      "Make the screen disappear. Prototype an immersive experience that gives people a new way to explore, learn, play, or collaborate.",
-    color: "coral",
-    icon: Sparkles,
-    glyph: "XR",
-  },
-  {
-    name: "FinTech & Financial Institution",
-    sponsor: "Open track",
-    eyebrow: "Track 03",
-    description:
       "Design a calmer, clearer future for money. Turn complex financial moments into tools people can actually understand and trust.",
-    color: "lime",
+    color: "cyan",
     icon: Database,
     glyph: "₹",
   },
   {
-    name: "Dev Tools & Infra",
+    name: "Medicine & Healthcare",
+    sponsor: "Open track",
+    eyebrow: "Track 02",
+    description:
+      "Build for better care. Reimagine the tools, systems, and small human moments that make health support more accessible and useful.",
+    color: "coral",
+    icon: HeartPulse,
+    glyph: "+",
+  },
+  {
+    name: "Drone Tech & Aviation",
+    sponsor: "Open track",
+    eyebrow: "Track 03",
+    description:
+      "Take the idea airborne. Explore navigation, autonomy, logistics, safety, and the next generation of movement through the sky.",
+    color: "lime",
+    icon: Plane,
+    glyph: "✈",
+  },
+  {
+    name: "Security",
     sponsor: "Open track",
     eyebrow: "Track 04",
     description:
-      "Create the invisible machinery that lets teams move faster. Think delightful workflows, sharper observability, and infrastructure with a point of view.",
+      "Make the digital world harder to break and easier to trust. Build tools that protect people, systems, and the ideas inside them.",
     color: "blue",
-    icon: Code2,
-    glyph: "//",
+    icon: ShieldCheck,
+    glyph: "///",
   },
   {
     name: "Open Innovation",
@@ -95,18 +98,8 @@ const tracks = [
     description:
       "No box, no brief, no ceiling. Bring the strange idea, the stubborn problem, or the tiny detail that deserves a much bigger solution.",
     color: "violet",
-    icon: Layers,
+    icon: Sparkles,
     glyph: "∞",
-  },
-  {
-    name: "Multimedia Tech",
-    sponsor: "Open track",
-    eyebrow: "Track 06",
-    description:
-      "Mix pixels, sound, motion, and code into something people can feel. Build an expressive digital object with a pulse of its own.",
-    color: "yellow",
-    icon: Boxes,
-    glyph: "✦",
   },
 ];
 
@@ -289,9 +282,9 @@ export default function Home() {
       <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
         <Mark />
         <div className="header-actions">
-          <button className={`music-toggle ${musicPlaying ? "music-toggle--active" : ""}`} onClick={toggleMusic} aria-pressed={musicPlaying} aria-label={musicPlaying ? "Pause event music" : "Play event music"}>
-            <span className="music-toggle__icon">{musicPlaying ? <Volume2 size={17} /> : <VolumeX size={17} />}</span>
-            <span className="music-toggle__copy"><span>{musicPlaying ? "ON AIR" : "PLAY SOUND"}</span><small>ORIGINAL SIREN MIX</small></span>
+          <button className={`music-toggle ${musicPlaying ? "music-toggle--active" : ""}`} onClick={toggleMusic} aria-pressed={musicPlaying} aria-label={musicPlaying ? "Turn music off" : "Turn music on"}>
+            <span className="music-toggle__icon">{musicPlaying ? <Volume2 size={21} /> : <VolumeX size={21} />}</span>
+            <span className="music-toggle__state">{musicPlaying ? "ON" : "OFF"}</span>
           </button>
           <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
           <span className="menu-trigger__word">MENU</span>
@@ -409,7 +402,7 @@ export default function Home() {
             <SectionLabel number="05">PICK A DIRECTION</SectionLabel>
             <div className="tracks__arrows"><button onClick={() => moveTrack(-1)} aria-label="Previous track"><ChevronLeft /></button><button onClick={() => moveTrack(1)} aria-label="Next track"><ChevronRight /></button></div>
           </div>
-          <div className="tracks__title-row"><h2>Six ways<br /><span>to go deep.</span></h2><p>Follow the thing you cannot stop thinking about. Every track is a different excuse to make something useful, expressive, or beautifully unnecessary.</p></div>
+          <div className="tracks__title-row"><h2>Five ways<br /><span>to go deep.</span></h2><p>Follow the thing you cannot stop thinking about. Every track is a different excuse to make something useful, expressive, or beautifully unnecessary.</p></div>
           <div className="tracks__canvas">
             <div className="tracks__object-image"><img src={trackArt} alt="Abstract collection of track objects" /></div>
             <div className="tracks__active-card">

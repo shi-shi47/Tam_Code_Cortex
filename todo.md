@@ -25,3 +25,10 @@
 - [x] Place the Code cortex and TAM logos in the header, menu, hero, and footer as appropriate.
 - [x] Run typecheck/build and verify desktop/mobile rendering plus existing interactions.
 - [x] Save and deliver the updated checkpoint.
+
+## Music toggle and track lineup update
+
+- [x] Convert the music control to a larger centered ON/OFF state toggle.
+- [x] Replace the existing track data with Finance, Medicine & Healthcare, Drone Tech & Aviation, Security, and Open Innovation.
+- [x] Verify carousel controls, responsive track layout, and playback state labels.
+- [x] Save and deliver the updated checkpoint.
