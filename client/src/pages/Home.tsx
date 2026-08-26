@@ -1,4 +1,7 @@
 // Design direction: playful digital maximalism — midnight navy, electric cyan, cobalt, coral, citrus, oversized display type, layered objects, and tactile controls.
+import { useAuth } from "@/_core/hooks/useAuth";
+import { startLogin } from "@/const";
+import { trpc } from "@/lib/trpc";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import {
@@ -198,13 +201,27 @@ export default function Home() {
   const [selectedNomination, setSelectedNomination] = useState<string | null>(null);
   const [hasVoted, setHasVoted] = useState(false);
   const [nominationVotes, setNominationVotes] = useState(() => Object.fromEntries(nominationOptions.map((option) => [option.id, option.votes])) as Record<string, number>);
+  const [authPanel, setAuthPanel] = useState<"participant-login" | "participant-register" | "admin" | null>(null);
+  const [teamIdInput, setTeamIdInput] = useState("");
+  const [teamNameInput, setTeamNameInput] = useState("");
+  const [teamPasswordInput, setTeamPasswordInput] = useState("");
+  const [authMessage, setAuthMessage] = useState<string | null>(null);
+  const [participantTeam, setParticipantTeam] = useState<{ teamId: string; teamName: string } | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { user: ownerUser } = useAuth();
+  const teamRegisterMutation = trpc.teams.register.useMutation();
+  const teamLoginMutation = trpc.teams.login.useMutation();
+  const participantMeQuery = trpc.teams.me.useQuery();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (participantMeQuery.data) setParticipantTeam(participantMeQuery.data);
+  }, [participantMeQuery.data]);
 
   useEffect(() => {
     const savedNomination = window.localStorage.getItem("code-cortex-song-nomination");
@@ -229,11 +246,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen || Boolean(authPanel) ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuOpen]);
+  }, [menuOpen, authPanel]);
 
   const activeTrack = tracks[trackIndex];
   const faqItems = useMemo(() => faqs[faqMode], [faqMode]);
@@ -255,6 +272,26 @@ export default function Home() {
       setMusicPlaying(true);
     } catch {
       setMusicPlaying(false);
+    }
+  };
+
+  const openAuthPanel = (mode: "participant-login" | "participant-register" | "admin") => {
+    setAuthMessage(null);
+    setAuthPanel(mode);
+  };
+
+  const submitParticipantAuth = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setAuthMessage(null);
+    try {
+      const team = authPanel === "participant-register"
+        ? await teamRegisterMutation.mutateAsync({ teamId: teamIdInput, teamName: teamNameInput, password: teamPasswordInput })
+        : await teamLoginMutation.mutateAsync({ teamId: teamIdInput, password: teamPasswordInput });
+      setParticipantTeam(team);
+      setAuthMessage(authPanel === "participant-register" ? "Team registered. Your participant session is active." : "Welcome back. Your participant session is active.");
+      setTeamPasswordInput("");
+    } catch (error) {
+      setAuthMessage(error instanceof Error ? error.message : "We could not complete that request. Try again.");
     }
   };
 
@@ -281,12 +318,43 @@ export default function Home() {
             <span className="music-toggle__icon">{musicPlaying ? <Volume2 size={21} /> : <VolumeX size={21} />}</span>
             <span className="music-toggle__state">{musicPlaying ? "ON" : "OFF"}</span>
           </button>
+          <button className="participant-trigger" onClick={() => openAuthPanel("participant-login")} aria-label={participantTeam ? `Signed in as ${participantTeam.teamName}` : "Open participant login"}>
+            {participantTeam ? "TEAM / ON" : "TEAM LOGIN"}
+          </button>
+          <button className="admin-switch" onClick={() => openAuthPanel("admin")} aria-label="Open admin login">ADMIN</button>
           <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-          <span className="menu-trigger__word">MENU</span>
+            <span className="menu-trigger__word">MENU</span>
             <span className="menu-trigger__icon"><Menu size={22} strokeWidth={1.8} /></span>
           </button>
         </div>
       </header>
+
+      <div className={`auth-panel-backdrop ${authPanel ? "auth-panel-backdrop--open" : ""}`} onClick={() => setAuthPanel(null)} aria-hidden={!authPanel} />
+      <aside className={`auth-panel ${authPanel ? "auth-panel--open" : ""}`} aria-hidden={!authPanel} aria-label="Account access panel">
+        <div className="auth-panel__topline"><span>ACCESS / {authPanel === "admin" ? "OWNER" : "PARTICIPANT"}</span><button onClick={() => setAuthPanel(null)} aria-label="Close account access"><X size={22} /></button></div>
+        {authPanel === "admin" ? (
+          <div className="auth-panel__body">
+            <SectionLabel number="A1">ADMIN SWITCH</SectionLabel>
+            <h2>Owner<br /><span>access.</span></h2>
+            <p className="auth-panel__intro">Admin access is linked to the existing TAM-VIT owner account. No separate admin password is stored in this app.</p>
+            {ownerUser?.role === "admin" ? <div className="auth-panel__owner-card"><span>OWNER SESSION ACTIVE</span><strong>{ownerUser.name || ownerUser.email || "TAM-VIT owner"}</strong><small>{ownerUser.email || "Role verified by Manus OAuth"}</small></div> : <><p className="auth-panel__intro">{ownerUser ? "This account is not marked as the TAM-VIT owner. Switch to the owner account to continue." : "Continue to the existing TAM-VIT owner sign-in. Admin access is granted only when that account carries the admin role."}</p><button className="auth-panel__submit" onClick={() => startLogin()}>CONTINUE WITH OWNER SIGN IN <ArrowUpRight size={18} /></button></>}
+          </div>
+        ) : (
+          <div className="auth-panel__body">
+            <SectionLabel number="A0">TEAM ACCESS</SectionLabel>
+            <h2>{authPanel === "participant-register" ? <>Register<br /><span>your team.</span></> : <>Welcome<br /><span>back.</span></>}</h2>
+            <p className="auth-panel__intro">Use your team ID and password to enter the participant area. Team names are checked for duplicates during registration.</p>
+            <form className="auth-form" onSubmit={submitParticipantAuth}>
+              <label>TEAM ID<input value={teamIdInput} onChange={(event) => setTeamIdInput(event.target.value)} placeholder="team-alpha" autoComplete="username" required /></label>
+              {authPanel === "participant-register" && <label>TEAM NAME<input value={teamNameInput} onChange={(event) => setTeamNameInput(event.target.value)} placeholder="Team Alpha" autoComplete="organization" required /></label>}
+              <label>PASSWORD<input type="password" value={teamPasswordInput} onChange={(event) => setTeamPasswordInput(event.target.value)} placeholder="Minimum 8 characters" autoComplete={authPanel === "participant-register" ? "new-password" : "current-password"} required /></label>
+              <button className="auth-panel__submit" type="submit" disabled={teamRegisterMutation.isPending || teamLoginMutation.isPending}>{teamRegisterMutation.isPending || teamLoginMutation.isPending ? "WORKING..." : authPanel === "participant-register" ? "REGISTER TEAM" : "SIGN IN"} <ArrowUpRight size={18} /></button>
+            </form>
+            {authMessage && <p className="auth-panel__message" role="status">{authMessage}</p>}
+            <button className="auth-panel__switch" onClick={() => openAuthPanel(authPanel === "participant-register" ? "participant-login" : "participant-register")}>{authPanel === "participant-register" ? "Already have a team? Sign in" : "New team? Register here"}</button>
+          </div>
+        )}
+      </aside>
 
       <div className={`menu-panel ${menuOpen ? "menu-panel--open" : ""}`} aria-hidden={!menuOpen}>
         <div className="menu-panel__topline">

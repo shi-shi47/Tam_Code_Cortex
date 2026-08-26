@@ -39,3 +39,12 @@
 - [x] Remove the submission CTA and any related authentication prompts without leaving dead-end navigation.
 - [x] Run typecheck/build and verify desktop/mobile layout and page copy.
 - [x] Save and deliver the updated checkpoint.
+
+## Participant and admin authentication
+
+- [x] Define team registration/login fields, roles, and uniqueness rules.
+- [x] Upgrade the static project to the full-stack database/auth foundation.
+- [x] Add server-side team registration/login procedures with unique team-name rejection.
+- [x] Add the compact admin switch and slide-in owner-role admin login flow.
+- [x] Verify validation, duplicate rejection, loading/error states, responsive presentation, and production build.
+- [x] Save and deliver the updated checkpoint.

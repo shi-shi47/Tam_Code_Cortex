@@ -10,3 +10,9 @@ The page scrolls cleanly through the VIT and TAM-VIT story cards toward the Trac
 ## Interaction result
 
 The music button successfully changes from PLAY SOUND to ON AIR after activation, with the accessible hint changing to Pause event music. Selecting the first nomination changes its label to YOUR PICK, increments its vote count from 86 to 87, disables repeat voting, and changes the footer message to “Your nomination is locked in. Let the room decide.”
+## Auth drawer verification
+
+The upgraded preview loads the participant access drawer from the header. The drawer presents TEAM ID and PASSWORD fields, SIGN IN action, and a separate registration switch. The compact header also exposes ADMIN beside TEAM LOGIN, while the underlying Code cortex hero remains visible and dimmed behind the drawer.
+## Registration-mode verification
+
+The participant drawer switches from login to registration and exposes TEAM ID, TEAM NAME, and PASSWORD fields with a REGISTER TEAM action. The page remains visually intact behind the drawer and the five current track labels are present in the page structure.
