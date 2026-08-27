@@ -38,6 +38,7 @@ import {
 
 const sirenTrack = "/manus-storage/code-cortex-siren-ambience_89aed583.wav";
 const codeCortexLogo = "/manus-storage/code-cortex-logo-transparent_52bd5849.png";
+const polyfabLogo = "/manus-storage/polyfab-logo_54e76553.png";
 const tamWhiteLogo = "/manus-storage/tam-white-logo_5a224019.png";
 const orbitArt = "/manus-storage/devjams-orbit-sphere_1b14088e.png";
 const trackArt = "/manus-storage/devjams-track-objects_36355203.png";
@@ -141,27 +142,6 @@ function SectionLabel({ number, children }: { number: string; children: ReactNod
       <span className="section-label__number">{number}</span>
       <span className="section-label__line" />
       <span>{children}</span>
-    </div>
-  );
-}
-
-function Wordmark() {
-  return (
-    <div className="wordmark" aria-label="Code cortex">
-      <div className="wordmark__line">
-        <span className="wordmark__char wordmark__char--d">C</span>
-        <span className="wordmark__char wordmark__char--e">o</span>
-        <span className="wordmark__char wordmark__char--v">d</span>
-        <span className="wordmark__char wordmark__char--j">e</span>
-      </div>
-      <div className="wordmark__line wordmark__line--offset">
-        <span className="wordmark__char wordmark__char--a">c</span>
-        <span className="wordmark__char wordmark__char--m">o</span>
-        <span className="wordmark__char wordmark__char--s">r</span>
-        <span className="wordmark__char wordmark__char--d">t</span>
-        <span className="wordmark__char wordmark__char--e">e</span>
-        <span className="wordmark__char wordmark__char--v">x</span>
-      </div>
     </div>
   );
 }
@@ -387,9 +367,8 @@ export default function Home() {
             <span>TAM-VIT / INDIA</span>
           </div>
           <div className="hero__copy page-pad">
-            <div className="hero__official-logo"><img src={codeCortexLogo} alt="Code cortex 3.0" /><span>OFFICIAL EVENT MARK / TAM-VIT</span></div>
             <p className="eyebrow eyebrow--bright"><span className="eyebrow__pulse" /> 30 HOURS / ONE IDEA / ZERO LIMITS</p>
-            <Wordmark />
+            <img className="hero__logo" src={codeCortexLogo} alt="Code cortex 3.0" />
             <div className="hero__headline-row">
               <h1>30 Hours.<br /><em>One Idea.<br />Zero Limits.</em></h1>
               <a className="round-cta" href="#tracks" onClick={(event) => { event.preventDefault(); jumpTo("#tracks"); }}>
@@ -510,11 +489,11 @@ export default function Home() {
 
         <section id="gallery" className="events section-light page-pad" data-reveal>
           <div className="events__header"><SectionLabel number="07">BEFORE THE JAM</SectionLabel><span className="events__header-note">A LITTLE ARCHIVE / BIG ENERGY</span></div>
-          <div className="events__title-row"><h2>We’ve been<br /><span>busy.</span></h2><p>Three events. Hundreds of ideas. A growing collection of proof that the most interesting work starts before anybody knows what to call it.</p></div>
+          <div className="events__title-row"><h2>We’ve been<br /><span>busy.</span></h2><p>Three past builds. A growing archive of proof that the most interesting work starts before anybody knows what to call it.</p></div>
           <div className="event-grid">
-            <article className="event-card event-card--triangle"><div className="event-card__shape event-card__shape--triangle">△</div><div className="event-card__meta"><span>2026 / 36 HOURS</span><ArrowUpRight size={19} /></div><h3>Women<br />Techies’26</h3><p>A women-centric hackathon fostering inclusivity, collaboration, and innovation.</p></article>
-            <article className="event-card event-card--circle"><div className="event-card__shape event-card__shape--circle">◎</div><div className="event-card__meta"><span>2026 / 24 HOURS</span><ArrowUpRight size={19} /></div><h3>Hexathon’26</h3><p>A beginner-friendly designathon where creativity meets problem-solving.</p></article>
-            <article className="event-card event-card--flower"><div className="event-card__shape event-card__shape--flower">✽</div><div className="event-card__meta"><span>2025 / EDITION 08</span><ArrowUpRight size={19} /></div><h3>Code cortex’25</h3><p>3,500+ registrations. 750+ shortlisted participants. One wildly imaginative weekend.</p></article>
+            <article className="event-card event-card--triangle"><div className="event-card__shape event-card__shape--triangle">△</div><div className="event-card__meta"><span>PAST EVENT / 01</span><ArrowUpRight size={19} /></div><h3>Bida<br />thon</h3><p>A fast-moving build where ideas compete, evolve, and find their sharpest form.</p></article>
+            <article className="event-card event-card--circle"><div className="event-card__shape event-card__shape--circle">◎</div><div className="event-card__meta"><span>PAST EVENT / 02</span><ArrowUpRight size={19} /></div><h3>Data<br />Alchemy</h3><p>Turn messy questions into clear insights, useful tools, and unexpected directions.</p></article>
+            <article className="event-card event-card--flower"><div className="event-card__shape event-card__shape--flower">✽</div><div className="event-card__meta"><span>PAST EVENT / 03</span><ArrowUpRight size={19} /></div><h3>Red<br />handed</h3><p>A sharp, playful challenge for fast thinking and ideas that leave a mark.</p></article>
           </div>
         </section>
 
@@ -522,9 +501,12 @@ export default function Home() {
           <div className="sponsors__header"><SectionLabel number="08">POWERED BY</SectionLabel><span>THANK YOU, INTERNET</span></div>
           <div className="sponsors__title-row"><h2>Good ideas<br /><span>need friends.</span></h2><p>We are grateful to the teams that make room for new builders, new questions, and the occasional delightfully over-engineered side project.</p></div>
           <div className="sponsor-grid">
-            <a className="sponsor-card sponsor-card--diamond" href="https://reka.ai/" target="_blank" rel="noreferrer"><span className="sponsor-card__rank">DIAMOND</span><span className="sponsor-card__name">REKA<span className="sponsor-card__spark">✦</span></span><span className="sponsor-card__arrow"><ArrowUpRight /></span></a>
-            <a className="sponsor-card sponsor-card--gold" href="https://www.exasol.com/" target="_blank" rel="noreferrer"><span className="sponsor-card__rank">GOLD</span><span className="sponsor-card__name">exasol<span className="sponsor-card__line" /></span><span className="sponsor-card__arrow"><ArrowUpRight /></span></a>
-            <a className="sponsor-card sponsor-card--bronze" href="https://www.aemsinfra.com/" target="_blank" rel="noreferrer"><span className="sponsor-card__rank">BRONZE</span><span className="sponsor-card__name">AEMS</span><span className="sponsor-card__arrow"><ArrowUpRight /></span></a>
+            <a className="sponsor-card sponsor-card--polyfab" href="https://polyfab.co.in/" target="_blank" rel="noreferrer" aria-label="Visit POLYFAB website">
+              <span className="sponsor-card__rank">OFFICIAL SPONSOR</span>
+              <img className="sponsor-card__logo" src={polyfabLogo} alt="POLYFAB" />
+              <span className="sponsor-card__name">POLYFAB</span>
+              <span className="sponsor-card__arrow"><ArrowUpRight /></span>
+            </a>
           </div>
           <div className="sponsors__sun"><span>THE<br />SUN IS<br />ON.</span></div>
         </section>

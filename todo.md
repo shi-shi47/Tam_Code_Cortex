@@ -48,3 +48,12 @@
 - [x] Add the compact admin switch and slide-in owner-role admin login flow.
 - [x] Verify validation, duplicate rejection, loading/error states, responsive presentation, and production build.
 - [x] Save and deliver the updated checkpoint.
+
+## Hero logo, archive, and POLYFAB sponsor update
+
+- [x] Prepare and upload the supplied POLYFAB sponsor logo without re-viewing the attached image.
+- [x] Replace the landing-page Code cortex title treatment with the supplied logo.
+- [x] Replace the archive events with Bidathon, Data Alchemy, and Red handed.
+- [x] Remove the existing sponsor lineup and add one linked POLYFAB sponsor card.
+- [x] Run typecheck/build and verify the sponsor link plus desktop/mobile layouts.
+- [x] Save and deliver the updated checkpoint.
