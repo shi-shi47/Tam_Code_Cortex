@@ -57,3 +57,10 @@
 - [x] Remove the existing sponsor lineup and add one linked POLYFAB sponsor card.
 - [x] Run typecheck/build and verify the sponsor link plus desktop/mobile layouts.
 - [x] Save and deliver the updated checkpoint.
+
+## Logo and icon visibility refinement
+
+- [x] Increase the Code cortex hero logo size while preserving responsive spacing.
+- [x] Increase visibility of TAM, sponsor, and interface icons through sizing and contrast adjustments.
+- [x] Run typecheck/build and verify desktop/mobile composition.
+- [x] Save and deliver the updated checkpoint.
