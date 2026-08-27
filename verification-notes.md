@@ -16,3 +16,15 @@ The upgraded preview loads the participant access drawer from the header. The dr
 ## Registration-mode verification
 
 The participant drawer switches from login to registration and exposes TEAM ID, TEAM NAME, and PASSWORD fields with a REGISTER TEAM action. The page remains visually intact behind the drawer and the five current track labels are present in the page structure.
+## Top tray verification
+
+The current preview shows the enlarged raised tray clearly separated from the hero. Clicking the music control changes the visible label from OFF to ON, updates its accessible hint to Turn music off, and changes the button to the active cyan state.
+## Tray interaction verification
+
+The enlarged tray is visually distinct on the desktop preview. The music button toggled from OFF to ON with active-state styling, and the TEAM LOGIN button opened the participant drawer without disturbing the underlying page composition.
+## Admin tray verification
+
+The raised tray keeps the ADMIN button distinct and clickable. Activating it opened the owner-access drawer, which correctly explains the existing TAM-VIT owner-role sign-in flow and presents the continue button without collecting a separate admin password.
+## Final tray verification
+
+The ADMIN control opened the owner-access panel successfully, and the MENU control opened the coral navigation panel with the full anchor list. The enlarged tray controls remain distinct and interactive after the restyle.

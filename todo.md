@@ -64,3 +64,10 @@
 - [x] Increase visibility of TAM, sponsor, and interface icons through sizing and contrast adjustments.
 - [x] Run typecheck/build and verify desktop/mobile composition.
 - [x] Save and deliver the updated checkpoint.
+
+## Top control tray visibility refinement
+
+- [x] Increase the tray’s visual prominence with a stronger surface, border, spacing, and shadow treatment.
+- [x] Enlarge the music, team, admin, and menu controls while keeping labels readable.
+- [x] Verify desktop/mobile tray spacing and interaction states.
+- [x] Save and deliver the updated checkpoint.
