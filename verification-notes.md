@@ -31,3 +31,9 @@ The ADMIN control opened the owner-access panel successfully, and the MENU contr
 ## Event cover, socials, and menu-icon verification
 
 The supplied Data Alchemy photo is uploaded at `/manus-storage/data-alchemy-cover_5c835fc4.webp`. The provided TAM Instagram destination redirects to an Instagram login wall but preserves the requested profile URL; the GitHub destination resolves to `github.com/Tam`; and LinkedIn resolves to the provided TAM Systems company URL. The preview exposes the new TAM social links with accessible labels and renders the Data Alchemy cover in the archive card.
+## Scrollable menu and floating icon verification
+
+The live preview opens the full-screen navigation tray with the per-item icons visibly rendered in navy beside Home, About, Tracks, Nominate, Gallery, Sponsors, FAQs, and Contact. The tray now owns vertical overflow and uses a sticky footer treatment so the menu can be scrolled independently on short viewports. The icons have staggered float timing and reduced-motion overrides disable the non-essential movement.
+## Scrollable tray verification
+
+The open menu tray was independently scrolled in the live preview. The content moves within the coral fixed tray while the page behind it remains unchanged; the navigation rows retain their navy icons and heading alignment. The icon float animation is configured with staggered delays, and the reduced-motion media query disables it.

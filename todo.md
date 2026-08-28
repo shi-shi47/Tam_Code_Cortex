@@ -80,3 +80,11 @@
 - [x] Enhance scroll choreography with staggered section movement and menu-item motion while respecting reduced motion.
 - [x] Run typecheck/build and verify external links, image rendering, menu interaction, and responsive behavior.
 - [x] Save and deliver the updated checkpoint.
+
+## Scrollable menu and floating navigation icons
+
+- [x] Make the full-screen menu tray vertically scrollable with usable mobile behavior.
+- [x] Recolor the menu and tray icons navy blue while maintaining contrast and focus states.
+- [x] Add playful floating motion attached to each menu heading/icon pair with reduced-motion support.
+- [x] Run typecheck/build and verify menu scrolling, icon styling, and responsive interaction.
+- [x] Save and deliver the updated checkpoint.
