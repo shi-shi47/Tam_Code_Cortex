@@ -414,12 +414,14 @@ export default function Home() {
             <UsersRound size={16} aria-hidden="true" /><span className="header-action__label">{participantTeam ? "TEAM / ON" : "TEAM LOGIN"}</span>
           </button>
           <button className="admin-switch" onClick={() => openAuthPanel("admin")} aria-label="Open admin login"><Shield size={16} aria-hidden="true" /><span className="header-action__label">ADMIN</span></button>
-          <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-            <span className="menu-trigger__word">MENU</span>
-            <span className="menu-trigger__icon"><Menu size={22} strokeWidth={1.8} /></span>
-          </button>
         </div>
       </header>
+      <div className="menu-rail">
+        <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+          <span className="menu-trigger__word">MENU</span>
+          <span className="menu-trigger__icon"><Menu size={22} strokeWidth={1.8} /></span>
+        </button>
+      </div>
 
       <div className={`auth-panel-backdrop ${authPanel ? "auth-panel-backdrop--open" : ""}`} onClick={() => setAuthPanel(null)} aria-hidden={!authPanel} />
       <aside className={`auth-panel ${authPanel ? "auth-panel--open" : ""}`} aria-hidden={!authPanel} aria-label="Account access panel">

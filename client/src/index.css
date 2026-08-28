@@ -103,6 +103,9 @@ img { display: block; max-width: 100%; }
 .cursor-tracer::after { border: 1px solid rgba(72,217,255,.52); border-radius: 50%; content: ""; inset: -5px; position: absolute; }
 .cursor-tracer.is-visible { opacity: 1; }
 .cursor-tracer--disabled { display: none; }
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html, html *, body { cursor: none !important; }
+}
 .page-pad { padding-left: clamp(22px, 6vw, 96px); padding-right: clamp(22px, 6vw, 96px); }
 .section-dark { background: var(--navy); color: var(--cream); }
 .section-light { background: #0b142a; color: var(--cream); }
@@ -175,6 +178,8 @@ img { display: block; max-width: 100%; }
 .brand--compact .brand__mark { height: 32px; width: 32px; }
 .brand--compact .brand__tam-logo { height: 34px; max-width: 120px; }
 .brand--compact .brand__top, .brand--compact .brand__bottom { font-size: 8px; }
+.menu-rail { align-items: center; display: flex; position: fixed; right: clamp(14px, 2.2vw, 32px); top: 50%; transform: translateY(-50%); z-index: 35; }
+.menu-rail .menu-trigger { background: rgba(9,21,44,.92); border: 1px solid rgba(72,217,255,.42); border-radius: 999px; box-shadow: 0 12px 28px rgba(0,0,0,.32), inset 0 0 0 1px rgba(246,240,220,.08); padding-left: 14px; }
 .menu-trigger, .menu-close { align-items: center; background: transparent; display: inline-flex; gap: 9px; letter-spacing: .12em; position: relative; text-transform: uppercase; z-index: 2; }
 .menu-trigger__word, .menu-close span { font-family: var(--mono); font-size: 10px; }
 .menu-trigger__icon { align-items: center; border: 1.5px solid rgba(246,240,220,.64); border-radius: 50%; display: inline-flex; height: 50px; justify-content: center; transition: background .2s ease, color .2s ease, transform .2s var(--ease-out); width: 50px; }
@@ -551,6 +556,8 @@ img { display: block; max-width: 100%; }
   .music-toggle__waveform { gap: 1.5px; margin-right: 6px; transform: scale(.86); }
   .music-toggle__state { font-size: 10px; }
   .music-toggle::after { background-size: 14px 100%, 14px 100%; }
+  .menu-rail { right: 10px; }
+  .menu-rail .menu-trigger { padding-left: 5px; }
   .menu-trigger__icon { height: 42px; width: 42px; }
   .site-header { padding: 17px 20px; }
   .site-header--scrolled { padding-bottom: 12px; padding-top: 12px; }
