@@ -120,4 +120,4 @@
 - [x] Move the menu control from the top-right tray to a vertically centered mid-right fixed position that remains visible during scrolling.
 - [x] Preserve menu keyboard focus, click targets, and touch/mobile usability after repositioning.
 - [x] Run tests, typecheck, production build, and desktop/mobile interaction verification.
-- [ ] Save and deliver the updated checkpoint.
+- [x] Save and deliver the updated checkpoint.
