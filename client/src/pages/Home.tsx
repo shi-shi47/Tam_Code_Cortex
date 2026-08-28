@@ -6,7 +6,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { Line, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import {
   ArrowLeft,
@@ -159,6 +159,7 @@ function SectionLabel({ number, children }: { number: string; children: ReactNod
 function MascotModel({ pointer, reducedMotion }: { pointer: { x: number; y: number }; reducedMotion: boolean }) {
   const { scene } = useGLTF(tamMascot);
   const groupRef = useRef<THREE.Group>(null);
+  const smileRef = useRef<THREE.Group>(null);
   const headRef = useRef<THREE.Object3D | null>(null);
   const model = useMemo(() => {
     const clone = scene.clone(true);
@@ -173,12 +174,16 @@ function MascotModel({ pointer, reducedMotion }: { pointer: { x: number; y: numb
 
   useFrame(() => {
     if (!groupRef.current) return;
-    const targetX = reducedMotion ? 0 : pointer.y * 0.1;
-    const targetY = reducedMotion ? 0 : pointer.x * 0.24;
+    const targetX = reducedMotion ? 0 : THREE.MathUtils.clamp(pointer.y * 0.032, -0.04, 0.04);
+    const targetY = reducedMotion ? 0 : THREE.MathUtils.clamp(pointer.x * 0.032, -0.028, 0.028);
     const head = headRef.current;
     if (head) {
       head.rotation.x = THREE.MathUtils.lerp(head.rotation.x, targetX, 0.08);
       head.rotation.y = THREE.MathUtils.lerp(head.rotation.y, targetY, 0.08);
+    }
+    if (smileRef.current) {
+      smileRef.current.rotation.x = THREE.MathUtils.lerp(smileRef.current.rotation.x, targetX, 0.08);
+      smileRef.current.rotation.y = THREE.MathUtils.lerp(smileRef.current.rotation.y, targetY, 0.08);
     }
     groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, reducedMotion ? 0 : Math.sin(Date.now() * 0.0014) * 0.08, 0.06);
   });
@@ -192,7 +197,14 @@ function MascotModel({ pointer, reducedMotion }: { pointer: { x: number; y: numb
     return () => { headRef.current = null; };
   }, [model]);
 
-  return <group ref={groupRef}><primitive object={model} /></group>;
+  return (
+    <group ref={groupRef}>
+      <primitive object={model} />
+      <group ref={smileRef} position={[0, -0.34, 1.16]}>
+        <Line points={[[-0.28, 0.06, 0], [-0.2, -0.01, 0], [-0.1, -0.065, 0], [0, -0.085, 0], [0.1, -0.065, 0], [0.2, -0.01, 0], [0.28, 0.06, 0]]} color="#48d9ff" lineWidth={3.2} dashed={false} />
+      </group>
+    </group>
+  );
 }
 
 function MascotFallback() {

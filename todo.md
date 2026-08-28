@@ -121,3 +121,11 @@
 - [x] Preserve menu keyboard focus, click targets, and touch/mobile usability after repositioning.
 - [x] Run tests, typecheck, production build, and desktop/mobile interaction verification.
 - [x] Save and deliver the updated checkpoint.
+
+## Mascot expression and inverted menu refinement
+
+- [x] Add a friendly visible smile to the TAM 3D mascot.
+- [x] Constrain mascot head tracking so both eyes remain visible and the face does not rotate out of view.
+- [x] Restyle the fixed mid-right menu as an upside-down trapezium with vertically inverted MENU lettering.
+- [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
+- [x] Save and deliver the updated checkpoint.
