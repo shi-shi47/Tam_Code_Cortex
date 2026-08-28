@@ -20,17 +20,24 @@ import {
   ExternalLink,
   Github,
   Globe,
+  HandHeart,
   HeartPulse,
+  Home as HomeIcon,
+  Shield,
+  Image as ImageIcon,
   Instagram,
   Layers,
   Linkedin,
+  Info,
   Mail,
   Menu,
   Music2,
   Phone,
+  HelpCircle,
   Plane,
   ShieldCheck,
   Sparkles,
+  UsersRound,
   Volume2,
   VolumeX,
   X,
@@ -44,14 +51,14 @@ const orbitArt = "/manus-storage/devjams-orbit-sphere_1b14088e.png";
 const trackArt = "/manus-storage/devjams-track-objects_36355203.png";
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Tracks", href: "#tracks" },
-  { label: "Nominate", href: "#nominate" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Sponsors", href: "#sponsors" },
-  { label: "FAQs", href: "#faqs" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "#home", icon: HomeIcon },
+  { label: "About", href: "#about", icon: Info },
+  { label: "Tracks", href: "#tracks", icon: Layers },
+  { label: "Nominate", href: "#nominate", icon: Music2 },
+  { label: "Gallery", href: "#gallery", icon: ImageIcon },
+  { label: "Sponsors", href: "#sponsors", icon: HandHeart },
+  { label: "FAQs", href: "#faqs", icon: HelpCircle },
+  { label: "Contact", href: "#contact", icon: Mail },
 ];
 
 const tracks = [
@@ -299,9 +306,9 @@ export default function Home() {
             <span className="music-toggle__state">{musicPlaying ? "ON" : "OFF"}</span>
           </button>
           <button className="participant-trigger" onClick={() => openAuthPanel("participant-login")} aria-label={participantTeam ? `Signed in as ${participantTeam.teamName}` : "Open participant login"}>
-            {participantTeam ? "TEAM / ON" : "TEAM LOGIN"}
+            <UsersRound size={16} aria-hidden="true" /><span className="header-action__label">{participantTeam ? "TEAM / ON" : "TEAM LOGIN"}</span>
           </button>
-          <button className="admin-switch" onClick={() => openAuthPanel("admin")} aria-label="Open admin login">ADMIN</button>
+          <button className="admin-switch" onClick={() => openAuthPanel("admin")} aria-label="Open admin login"><Shield size={16} aria-hidden="true" /><span className="header-action__label">ADMIN</span></button>
           <button className="menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             <span className="menu-trigger__word">MENU</span>
             <span className="menu-trigger__icon"><Menu size={22} strokeWidth={1.8} /></span>
@@ -346,13 +353,17 @@ export default function Home() {
         <div className="menu-panel__body">
           <span className="menu-panel__side-note">NAV / CODE CORTEX</span>
           <nav className="menu-panel__nav">
-            {navItems.map((item, index) => (
-              <a href={item.href} key={item.href} onClick={(event) => { event.preventDefault(); jumpTo(item.href); }}>
-                <span className="menu-panel__index">0{index + 1}</span>
-                <span>{item.label}</span>
-                <ArrowUpRight size={22} strokeWidth={1.4} />
-              </a>
-            ))}
+            {navItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <a href={item.href} key={item.href} onClick={(event) => { event.preventDefault(); jumpTo(item.href); }}>
+                  <span className="menu-panel__index">0{index + 1}</span>
+                  <Icon className="menu-panel__item-icon" size={22} strokeWidth={1.6} aria-hidden="true" />
+                  <span className="menu-panel__item-label">{item.label}</span>
+                  <ArrowUpRight className="menu-panel__item-arrow" size={22} strokeWidth={1.4} />
+                </a>
+              );
+            })}
           </nav>
         </div>
         <div className="menu-panel__footer"><span>30 HOURS / ONE BIG IDEA</span><span>TAM-VIT · 2026</span></div>
@@ -492,7 +503,7 @@ export default function Home() {
           <div className="events__title-row"><h2>We’ve been<br /><span>busy.</span></h2><p>Three past builds. A growing archive of proof that the most interesting work starts before anybody knows what to call it.</p></div>
           <div className="event-grid">
             <article className="event-card event-card--triangle"><div className="event-card__shape event-card__shape--triangle">△</div><div className="event-card__meta"><span>PAST EVENT / 01</span><ArrowUpRight size={19} /></div><h3>Bida<br />thon</h3><p>A fast-moving build where ideas compete, evolve, and find their sharpest form.</p></article>
-            <article className="event-card event-card--circle"><div className="event-card__shape event-card__shape--circle">◎</div><div className="event-card__meta"><span>PAST EVENT / 02</span><ArrowUpRight size={19} /></div><h3>Data<br />Alchemy</h3><p>Turn messy questions into clear insights, useful tools, and unexpected directions.</p></article>
+            <article className="event-card event-card--circle"><div className="event-card__shape event-card__shape--circle">◎</div><img className="event-card__cover" src="/manus-storage/data-alchemy-cover_5c835fc4.webp" alt="TAM-VIT team gathered in a classroom for Data Alchemy" loading="lazy" /><div className="event-card__meta"><span>PAST EVENT / 02</span><ArrowUpRight size={19} /></div><h3>Data<br />Alchemy</h3><p>Turn messy questions into clear insights, useful tools, and unexpected directions.</p></article>
             <article className="event-card event-card--flower"><div className="event-card__shape event-card__shape--flower">✽</div><div className="event-card__meta"><span>PAST EVENT / 03</span><ArrowUpRight size={19} /></div><h3>Red<br />handed</h3><p>A sharp, playful challenge for fast thinking and ideas that leave a mark.</p></article>
           </div>
         </section>
@@ -523,7 +534,7 @@ export default function Home() {
 
       <footer id="contact" className="footer section-dark page-pad" data-reveal>
         <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
-        <div className="footer__bottom"><div className="footer__brand-lockup"><Mark compact /><img src={codeCortexLogo} alt="Code cortex 3.0" /></div><div className="footer__socials"><a href="#home" aria-label="Medium"><Code2 size={18} /></a><a href="#home" aria-label="Instagram"><Instagram size={18} /></a><a href="#home" aria-label="X Twitter"><Github size={18} /></a><a href="#home" aria-label="LinkedIn"><Linkedin size={18} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
+          <div className="footer__bottom"><div className="footer__brand-lockup"><Mark compact /><img src={codeCortexLogo} alt="Code cortex 3.0" /></div><div className="footer__socials"><a href="https://www.instagram.com/tam.vit_vellore?igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" aria-label="TAM on Instagram"><Instagram size={20} /></a><a href="https://github.com/Tam" target="_blank" rel="noreferrer" aria-label="TAM on GitHub"><Github size={20} /></a><a href="https://www.linkedin.com/company/tamsystems" target="_blank" rel="noreferrer" aria-label="TAM on LinkedIn"><Linkedin size={20} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
       </footer>
     </div>
   );

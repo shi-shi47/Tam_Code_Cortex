@@ -28,3 +28,6 @@ The raised tray keeps the ADMIN button distinct and clickable. Activating it ope
 ## Final tray verification
 
 The ADMIN control opened the owner-access panel successfully, and the MENU control opened the coral navigation panel with the full anchor list. The enlarged tray controls remain distinct and interactive after the restyle.
+## Event cover, socials, and menu-icon verification
+
+The supplied Data Alchemy photo is uploaded at `/manus-storage/data-alchemy-cover_5c835fc4.webp`. The provided TAM Instagram destination redirects to an Instagram login wall but preserves the requested profile URL; the GitHub destination resolves to `github.com/Tam`; and LinkedIn resolves to the provided TAM Systems company URL. The preview exposes the new TAM social links with accessible labels and renders the Data Alchemy cover in the archive card.

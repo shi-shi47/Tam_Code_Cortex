@@ -71,3 +71,12 @@
 - [x] Enlarge the music, team, admin, and menu controls while keeping labels readable.
 - [x] Verify desktop/mobile tray spacing and interaction states.
 - [x] Save and deliver the updated checkpoint.
+
+## Data Alchemy cover, TAM socials, and menu motion
+
+- [x] Copy and upload the supplied event photo for the Data Alchemy archive card without re-viewing the attached image.
+- [x] Add TAM Instagram, GitHub, and LinkedIn destinations to the social links.
+- [x] Add a small hero icon to every menu tray item with clear accessible labels.
+- [x] Enhance scroll choreography with staggered section movement and menu-item motion while respecting reduced motion.
+- [x] Run typecheck/build and verify external links, image rendering, menu interaction, and responsive behavior.
+- [x] Save and deliver the updated checkpoint.
