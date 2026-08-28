@@ -96,3 +96,12 @@
 - [x] Add a layered 3D floating effect with perspective, depth shadow, and reduced-motion support.
 - [x] Run typecheck/build and verify desktop/mobile heading alignment and motion.
 - [x] Save and deliver the updated checkpoint.
+
+## Centered TAM 3D mascot
+
+- [x] Copy and upload the supplied TAM3DMascot.glb asset to persistent web storage.
+- [x] Add the mascot centered in the hero and keep it visible only before the user scrolls.
+- [x] Make the mascot head subtly follow the cursor while the user remains at the top of the landing page.
+- [x] Add responsive, touch-safe, and reduced-motion fallbacks for the 3D experience.
+- [x] Run typecheck/build and verify pre-scroll visibility, pointer tracking, and mobile layout.
+- [x] Save and deliver the updated checkpoint.

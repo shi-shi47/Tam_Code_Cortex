@@ -2,9 +2,12 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 import {
   ArrowLeft,
   ArrowRight,
@@ -50,6 +53,7 @@ const polyfabLogo = "/manus-storage/polyfab-logo_54e76553.png";
 const tamWhiteLogo = "/manus-storage/tam-white-logo_5a224019.png";
 const orbitArt = "/manus-storage/devjams-orbit-sphere_1b14088e.png";
 const trackArt = "/manus-storage/devjams-track-objects_36355203.png";
+const tamMascot = "/manus-storage/TAM3DMascot_0757ee95.glb";
 
 const navItems = [
   { label: "Home", href: "#home", icon: HomeIcon },
@@ -154,6 +158,49 @@ function SectionLabel({ number, children }: { number: string; children: ReactNod
   );
 }
 
+function MascotModel({ pointer, reducedMotion }: { pointer: { x: number; y: number }; reducedMotion: boolean }) {
+  const { scene } = useGLTF(tamMascot);
+  const groupRef = useRef<THREE.Group>(null);
+  const headRef = useRef<THREE.Object3D | null>(null);
+  const model = useMemo(() => {
+    const clone = scene.clone(true);
+    const bounds = new THREE.Box3().setFromObject(clone);
+    const center = bounds.getCenter(new THREE.Vector3());
+    const size = bounds.getSize(new THREE.Vector3());
+    const scale = 2.4 / Math.max(size.x, size.y, size.z, 0.001);
+    clone.position.sub(center);
+    clone.scale.setScalar(scale);
+    return clone;
+  }, [scene]);
+
+  useFrame(() => {
+    if (!groupRef.current) return;
+    const targetX = reducedMotion ? 0 : pointer.y * 0.1;
+    const targetY = reducedMotion ? 0 : pointer.x * 0.24;
+    const head = headRef.current;
+    if (head) {
+      head.rotation.x = THREE.MathUtils.lerp(head.rotation.x, targetX, 0.08);
+      head.rotation.y = THREE.MathUtils.lerp(head.rotation.y, targetY, 0.08);
+    }
+    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, reducedMotion ? 0 : Math.sin(Date.now() * 0.0014) * 0.08, 0.06);
+  });
+
+  useEffect(() => {
+    let head: THREE.Object3D | null = null;
+    model.traverse((node) => {
+      if (!head && /^(cube|head|face|visor)$/i.test(node.name)) head = node;
+    });
+    headRef.current = head;
+    return () => { headRef.current = null; };
+  }, [model]);
+
+  return <group ref={groupRef}><primitive object={model} /></group>;
+}
+
+function MascotFallback() {
+  return <mesh position={[0, 0, 0]}><icosahedronGeometry args={[1.25, 2]} /><meshStandardMaterial color="#48d9ff" roughness={0.48} metalness={0.28} wireframe /></mesh>;
+}
+
 function HeadingIcon({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return <span className="heading-with-icon__icon" aria-label={label}><Icon size={32} strokeWidth={1.5} aria-hidden="true" /></span>;
 }
@@ -191,6 +238,9 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [selectedNomination, setSelectedNomination] = useState<string | null>(null);
+  const [mascotPointer, setMascotPointer] = useState({ x: 0, y: 0 });
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [coarsePointer, setCoarsePointer] = useState(false);
   const [hasVoted, setHasVoted] = useState(false);
   const [nominationVotes, setNominationVotes] = useState(() => Object.fromEntries(nominationOptions.map((option) => [option.id, option.votes])) as Record<string, number>);
   const [authPanel, setAuthPanel] = useState<"participant-login" | "participant-register" | "admin" | null>(null);
@@ -209,6 +259,17 @@ export default function Home() {
     const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    setCoarsePointer(window.matchMedia("(pointer: coarse)").matches);
+    const onPointerMove = (event: PointerEvent) => {
+      if (window.scrollY > 32 || window.matchMedia("(pointer: coarse)").matches) return;
+      setMascotPointer({ x: (event.clientX / window.innerWidth - 0.5) * 2, y: (event.clientY / window.innerHeight - 0.5) * 2 });
+    };
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onPointerMove);
   }, []);
 
   useEffect(() => {
@@ -381,6 +442,14 @@ export default function Home() {
           <div className="hero__topline page-pad">
             <span>TAM-VIT</span>
             <span>TAM-VIT / INDIA</span>
+          </div>
+          <div className={`hero__mascot ${scrolled ? "hero__mascot--hidden" : ""}`} aria-hidden="true" onPointerMove={(event) => { if (!scrolled && !coarsePointer) setMascotPointer({ x: (event.clientX / window.innerWidth - 0.5) * 2, y: (event.clientY / window.innerHeight - 0.5) * 2 }); }}>
+            <Canvas camera={{ position: [0, 0.15, 4.5], fov: 35 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
+              <ambientLight intensity={1.8} />
+              <directionalLight position={[2, 3, 4]} intensity={2.5} color="#48d9ff" />
+              <directionalLight position={[-3, 1, 2]} intensity={1.4} color="#d9f45b" />
+              <Suspense fallback={<MascotFallback />}><MascotModel pointer={mascotPointer} reducedMotion={reducedMotion || coarsePointer} /></Suspense>
+            </Canvas>
           </div>
           <div className="hero__copy page-pad">
             <p className="eyebrow eyebrow--bright"><span className="eyebrow__pulse" /> 30 HOURS / ONE IDEA / ZERO LIMITS</p>

@@ -37,3 +37,8 @@ The live preview opens the full-screen navigation tray with the per-item icons v
 ## Scrollable tray verification
 
 The open menu tray was independently scrolled in the live preview. The content moves within the coral fixed tray while the page behind it remains unchanged; the navigation rows retain their navy icons and heading alignment. The icon float animation is configured with staggered delays, and the reduced-motion media query disables it.
+## TAM 3D mascot verification
+
+The supplied TAM mascot GLB renders in the center of the pre-scroll hero on desktop and mobile. Its canvas is layered behind the hero copy, includes a subtle halo, and uses pointer-driven interpolation for the mascot’s head-facing motion. The mascot is hidden after the page scroll state becomes active, with a reduced-motion-safe fallback and a wireframe placeholder while the asset loads.
+The live preview loaded the supplied TAM mascot into a centered hero canvas. A pointer move across the pre-scroll hero was issued while the mascot was visible, exercising the smoothed head-target rotation. Touch/coarse-pointer mode is configured to keep a static idle pose instead of tracking pointer input.
+A live browser pointer move at the top of the hero changed the mascot’s head-facing pose. After scrolling one viewport down, the hero mascot left the visible composition while the page continued into the About section, confirming the requested pre-scroll-only presentation.
