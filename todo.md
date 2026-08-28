@@ -88,3 +88,11 @@
 - [x] Add playful floating motion attached to each menu heading/icon pair with reduced-motion support.
 - [x] Run typecheck/build and verify menu scrolling, icon styling, and responsive interaction.
 - [x] Save and deliver the updated checkpoint.
+
+## Section-heading icon attachment and 3D motion
+
+- [x] Bind each menu icon to its corresponding landing-page section heading.
+- [x] Add the icon beside the heading line so it travels with the heading during scroll.
+- [x] Add a layered 3D floating effect with perspective, depth shadow, and reduced-motion support.
+- [x] Run typecheck/build and verify desktop/mobile heading alignment and motion.
+- [x] Save and deliver the updated checkpoint.

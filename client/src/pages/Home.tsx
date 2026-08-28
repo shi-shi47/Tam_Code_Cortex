@@ -4,6 +4,7 @@ import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -151,6 +152,10 @@ function SectionLabel({ number, children }: { number: string; children: ReactNod
       <span>{children}</span>
     </div>
   );
+}
+
+function HeadingIcon({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
+  return <span className="heading-with-icon__icon" aria-label={label}><Icon size={32} strokeWidth={1.5} aria-hidden="true" /></span>;
 }
 
 function GridDoodle() {
@@ -380,8 +385,8 @@ export default function Home() {
           <div className="hero__copy page-pad">
             <p className="eyebrow eyebrow--bright"><span className="eyebrow__pulse" /> 30 HOURS / ONE IDEA / ZERO LIMITS</p>
             <img className="hero__logo" src={codeCortexLogo} alt="Code cortex 3.0" />
-            <div className="hero__headline-row">
-              <h1>30 Hours.<br /><em>One Idea.<br />Zero Limits.</em></h1>
+              <div className="hero__headline-row">
+              <div className="heading-with-icon heading-with-icon--hero"><HeadingIcon icon={HomeIcon} label="Home" /><h1>30 Hours.<br /><em>One Idea.<br />Zero Limits.</em></h1></div>
               <a className="round-cta" href="#tracks" onClick={(event) => { event.preventDefault(); jumpTo("#tracks"); }}>
                 <span>Explore<br />Tracks</span> <ArrowUpRight size={22} />
               </a>
@@ -399,7 +404,7 @@ export default function Home() {
         <section id="about" className="about section-light page-pad" data-reveal>
           <div className="about__intro">
             <SectionLabel number="01">ABOUT THE JAM</SectionLabel>
-            <h2>The build<br /><span>starts here.</span></h2>
+            <div className="heading-with-icon"><HeadingIcon icon={Info} label="About" /><h2>The build<br /><span>starts here.</span></h2></div>
             <p className="lead-copy">Code cortex is the flagship hackathon organized by TAM-VIT — a 30-hour intensive coding event designed to push the boundaries of innovation and develop practical problem-solving skills.</p>
             <a className="text-link" href="#tracks" onClick={(event) => { event.preventDefault(); jumpTo("#tracks"); }}>Find your track <ArrowRight size={18} /></a>
           </div>
@@ -424,7 +429,7 @@ export default function Home() {
             <SectionLabel number="02">WHO WE ARE</SectionLabel>
             <div className="manifesto__columns">
               <div>
-                <h2>Curiosity<br /><span>with a deadline.</span></h2>
+                <div className="heading-with-icon"><HeadingIcon icon={Sparkles} label="Who we are" /><h2>Curiosity<br /><span>with a deadline.</span></h2></div>
               </div>
               <div>
                 <p>Fueled by curiosity and a bit of chaos, we are a community of coders who push limits, designers who bring ideas to life, and managers who turn vision into reality.</p>
@@ -455,7 +460,7 @@ export default function Home() {
             <SectionLabel number="05">PICK A DIRECTION</SectionLabel>
             <div className="tracks__arrows"><button onClick={() => moveTrack(-1)} aria-label="Previous track"><ChevronLeft /></button><button onClick={() => moveTrack(1)} aria-label="Next track"><ChevronRight /></button></div>
           </div>
-          <div className="tracks__title-row"><h2>Five ways<br /><span>to go deep.</span></h2><p>Follow the thing you cannot stop thinking about. Every track is a different excuse to make something useful, expressive, or beautifully unnecessary.</p></div>
+          <div className="tracks__title-row"><div className="heading-with-icon"><HeadingIcon icon={Layers} label="Tracks" /><h2>Five ways<br /><span>to go deep.</span></h2></div><p>Follow the thing you cannot stop thinking about. Every track is a different excuse to make something useful, expressive, or beautifully unnecessary.</p></div>
           <div className="tracks__canvas">
             <div className="tracks__object-image"><img src={trackArt} alt="Abstract collection of track objects" /></div>
             <div className="tracks__active-card">
@@ -478,7 +483,7 @@ export default function Home() {
 
         <section id="nominate" className="nominate section-dark page-pad" data-reveal>
           <div className="nominate__header"><SectionLabel number="06">THE IN-BETWEEN SET</SectionLabel><span className="nominate__live"><span /> LIVE NOMINATION</span></div>
-          <div className="nominate__title-row"><h2>Pick the next<br /><span>soundtrack.</span></h2><div><p>What should carry us through the next build sprint? Vote for one mood. The room gets the final call when the playlist changes.</p><p className="nominate__note"><Music2 size={16} /> Voting is saved on this device.</p></div></div>
+          <div className="nominate__title-row"><div className="heading-with-icon"><HeadingIcon icon={Music2} label="Nominate" /><h2>Pick the next<br /><span>soundtrack.</span></h2></div><div><p>What should carry us through the next build sprint? Vote for one mood. The room gets the final call when the playlist changes.</p><p className="nominate__note"><Music2 size={16} /> Voting is saved on this device.</p></div></div>
           <div className="nominate__grid">
             {nominationOptions.map((option) => {
               const totalVotes = Object.values(nominationVotes).reduce((sum, value) => sum + value, 0);
@@ -500,7 +505,7 @@ export default function Home() {
 
         <section id="gallery" className="events section-light page-pad" data-reveal>
           <div className="events__header"><SectionLabel number="07">BEFORE THE JAM</SectionLabel><span className="events__header-note">A LITTLE ARCHIVE / BIG ENERGY</span></div>
-          <div className="events__title-row"><h2>We’ve been<br /><span>busy.</span></h2><p>Three past builds. A growing archive of proof that the most interesting work starts before anybody knows what to call it.</p></div>
+          <div className="events__title-row"><div className="heading-with-icon"><HeadingIcon icon={ImageIcon} label="Gallery" /><h2>We’ve been<br /><span>busy.</span></h2></div><p>Three past builds. A growing archive of proof that the most interesting work starts before anybody knows what to call it.</p></div>
           <div className="event-grid">
             <article className="event-card event-card--triangle"><div className="event-card__shape event-card__shape--triangle">△</div><div className="event-card__meta"><span>PAST EVENT / 01</span><ArrowUpRight size={19} /></div><h3>Bida<br />thon</h3><p>A fast-moving build where ideas compete, evolve, and find their sharpest form.</p></article>
             <article className="event-card event-card--circle"><div className="event-card__shape event-card__shape--circle">◎</div><img className="event-card__cover" src="/manus-storage/data-alchemy-cover_5c835fc4.webp" alt="TAM-VIT team gathered in a classroom for Data Alchemy" loading="lazy" /><div className="event-card__meta"><span>PAST EVENT / 02</span><ArrowUpRight size={19} /></div><h3>Data<br />Alchemy</h3><p>Turn messy questions into clear insights, useful tools, and unexpected directions.</p></article>
@@ -510,7 +515,7 @@ export default function Home() {
 
         <section id="sponsors" className="sponsors section-dark page-pad" data-reveal>
           <div className="sponsors__header"><SectionLabel number="08">POWERED BY</SectionLabel><span>THANK YOU, INTERNET</span></div>
-          <div className="sponsors__title-row"><h2>Good ideas<br /><span>need friends.</span></h2><p>We are grateful to the teams that make room for new builders, new questions, and the occasional delightfully over-engineered side project.</p></div>
+          <div className="sponsors__title-row"><div className="heading-with-icon"><HeadingIcon icon={HandHeart} label="Sponsors" /><h2>Good ideas<br /><span>need friends.</span></h2></div><p>We are grateful to the teams that make room for new builders, new questions, and the occasional delightfully over-engineered side project.</p></div>
           <div className="sponsor-grid">
             <a className="sponsor-card sponsor-card--polyfab" href="https://polyfab.co.in/" target="_blank" rel="noreferrer" aria-label="Visit POLYFAB website">
               <span className="sponsor-card__rank">OFFICIAL SPONSOR</span>
@@ -523,7 +528,7 @@ export default function Home() {
         </section>
 
         <section id="faqs" className="faq section-light page-pad" data-reveal>
-          <div className="faq__side"><SectionLabel number="09">NO SILLY QUESTIONS</SectionLabel><h2>Let’s break<br /><span>it down.</span></h2><p>Still curious? That is a good sign. Pick a tab and find the practical bits.</p><div className="faq__doodle"><span>?</span><span>!</span><span>↗</span></div></div>
+          <div className="faq__side"><SectionLabel number="09">NO SILLY QUESTIONS</SectionLabel><div className="heading-with-icon"><HeadingIcon icon={HelpCircle} label="FAQs" /><h2>Let’s break<br /><span>it down.</span></h2></div><p>Still curious? That is a good sign. Pick a tab and find the practical bits.</p><div className="faq__doodle"><span>?</span><span>!</span><span>↗</span></div></div>
           <div className="faq__main">
             <div className="faq__tabs">{(Object.keys(faqs) as Array<keyof typeof faqs>).map((mode) => <button key={mode} className={faqMode === mode ? "is-active" : ""} onClick={() => { setFaqMode(mode); setFaqOpen(0); }}>{mode}</button>)}</div>
             <div className="faq__list">{faqItems.map(([question, answer], index) => <div className={`faq-item ${faqOpen === index ? "faq-item--open" : ""}`} key={question}><button onClick={() => setFaqOpen(faqOpen === index ? -1 : index)} aria-expanded={faqOpen === index}><span>0{index + 1}</span><strong>{question}</strong><ChevronDown size={21} /></button><div className="faq-item__answer"><p>{answer}</p></div></div>)}</div>
@@ -533,7 +538,7 @@ export default function Home() {
       </main>
 
       <footer id="contact" className="footer section-dark page-pad" data-reveal>
-        <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
+        <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><div className="heading-with-icon"><HeadingIcon icon={Mail} label="Contact" /><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
           <div className="footer__bottom"><div className="footer__brand-lockup"><Mark compact /><img src={codeCortexLogo} alt="Code cortex 3.0" /></div><div className="footer__socials"><a href="https://www.instagram.com/tam.vit_vellore?igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" aria-label="TAM on Instagram"><Instagram size={20} /></a><a href="https://github.com/Tam" target="_blank" rel="noreferrer" aria-label="TAM on GitHub"><Github size={20} /></a><a href="https://www.linkedin.com/company/tamsystems" target="_blank" rel="noreferrer" aria-label="TAM on LinkedIn"><Linkedin size={20} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
       </footer>
     </div>

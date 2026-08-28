@@ -222,6 +222,12 @@ img { display: block; max-width: 100%; }
 .about { display: grid; gap: clamp(48px, 10vw, 160px); grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr); padding-bottom: clamp(110px, 14vw, 210px); padding-top: clamp(110px, 14vw, 210px); }
 .about__intro { padding-top: 4px; }
 .about h2, .manifesto h2, .tracks h2, .events h2, .sponsors h2, .faq h2, .footer h2 { font-size: clamp(54px, 8vw, 110px); font-weight: 500; letter-spacing: -.1em; line-height: .83; margin: clamp(48px, 7vw, 90px) 0 34px; }
+.heading-with-icon { align-items: flex-start; display: flex; gap: clamp(16px, 3vw, 42px); perspective: 900px; position: relative; }
+.heading-with-icon > h2 { flex: 1; min-width: 0; }
+.heading-with-icon__icon { align-items: center; animation: headingIconFloat 4.6s ease-in-out infinite; background: var(--cream); border: 1px solid var(--navy); border-radius: 18px 18px 18px 5px; box-shadow: 8px 10px 0 rgba(49,88,255,.34), inset -3px -3px 0 rgba(8,21,47,.1); color: var(--navy); display: inline-flex; flex: 0 0 auto; height: clamp(48px, 5vw, 70px); justify-content: center; margin-top: clamp(18px, 3vw, 34px); transform: rotate(-10deg) translateZ(0); transform-style: preserve-3d; transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out); width: clamp(48px, 5vw, 70px); }
+.heading-with-icon__icon:hover { box-shadow: 12px 14px 0 rgba(49,88,255,.44), inset -3px -3px 0 rgba(8,21,47,.12); transform: rotate(-3deg) translateY(-6px) translateZ(16px); }
+.heading-with-icon__icon svg { filter: drop-shadow(2px 3px 0 rgba(49,88,255,.22)); }
+
 .about h2 span, .events h2 span, .faq h2 span { color: var(--cobalt); }
 .lead-copy, .manifesto p, .duo-card p, .tracks__title-row p, .events__title-row p, .sponsors__title-row p, .faq__side p, .footer__contact a { font-size: clamp(16px, 1.5vw, 20px); letter-spacing: -.025em; line-height: 1.36; }
 .lead-copy { max-width: 450px; }
@@ -476,6 +482,7 @@ img { display: block; max-width: 100%; }
 .menu-panel--open .menu-panel__nav a:nth-child(8) { animation-delay: 315ms; }
 @keyframes menuItemIn { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes menuIconFloat { 0%, 100% { translate: 0 0; rotate: -8deg; } 50% { translate: 0 -5px; rotate: 5deg; } }
+@keyframes headingIconFloat { 0%, 100% { translate: 0 0; rotate: -10deg; } 50% { translate: 0 -10px; rotate: -4deg; } }
 .menu-panel__nav a:nth-child(2) .menu-panel__item-icon { animation-delay: -0.5s; }
 .menu-panel__nav a:nth-child(3) .menu-panel__item-icon { animation-delay: -1s; }
 .menu-panel__nav a:nth-child(4) .menu-panel__item-icon { animation-delay: -1.5s; }
@@ -545,6 +552,9 @@ img { display: block; max-width: 100%; }
   .hero__location { display: none; }
   .hero__bottom { margin-top: auto; }
   .about h2, .manifesto h2, .tracks h2, .events h2, .sponsors h2, .faq h2, .footer h2 { font-size: 64px; }
+  .heading-with-icon { gap: 14px; }
+  .heading-with-icon__icon { height: 46px; margin-top: 14px; width: 46px; }
+  .heading-with-icon__icon svg { height: 24px; width: 24px; }
   .about { padding-bottom: 100px; padding-top: 100px; }
   .about__visual { width: 100%; }
   .map-card { height: 360px; }
@@ -604,5 +614,6 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *:before, *:after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   [data-reveal], [data-reveal] .event-card { opacity: 1 !important; translate: 0 0 !important; }
+  .heading-with-icon__icon { animation: none !important; transform: none !important; translate: 0 0 !important; }
   .menu-panel--open .menu-panel__nav a, .menu-panel__nav a .menu-panel__item-icon { animation: none !important; }
 }
