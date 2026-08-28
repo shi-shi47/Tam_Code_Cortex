@@ -105,3 +105,11 @@
 - [x] Add responsive, touch-safe, and reduced-motion fallbacks for the 3D experience.
 - [x] Run typecheck/build and verify pre-scroll visibility, pointer tracking, and mobile layout.
 - [x] Save and deliver the updated checkpoint.
+
+## Music control and cursor tracer refinement
+
+- [x] Restyle the music toggle to match the supplied angular amber waveform reference while preserving ON/OFF accessibility and playback behavior.
+- [x] Add a subtle blue dot tracer that follows the cursor across the website without interfering with clicks or keyboard focus.
+- [x] Disable the cursor tracer on touch/coarse-pointer devices and under reduced-motion preferences.
+- [x] Run tests, typecheck, production build, and desktop/mobile visual verification for the new interactions.
+- [x] Save and deliver the updated checkpoint.

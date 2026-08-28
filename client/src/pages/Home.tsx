@@ -42,8 +42,6 @@ import {
   ShieldCheck,
   Sparkles,
   UsersRound,
-  Volume2,
-  VolumeX,
   X,
 } from "lucide-react";
 
@@ -199,6 +197,46 @@ function MascotModel({ pointer, reducedMotion }: { pointer: { x: number; y: numb
 
 function MascotFallback() {
   return <mesh position={[0, 0, 0]}><icosahedronGeometry args={[1.25, 2]} /><meshStandardMaterial color="#48d9ff" roughness={0.48} metalness={0.28} wireframe /></mesh>;
+}
+
+function CursorTracer({ disabled }: { disabled: boolean }) {
+  const tracerRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const tracer = tracerRef.current;
+    if (!tracer || disabled) return;
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+
+    const hide = () => tracer.classList.remove("is-visible");
+    const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch" || window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      x = event.clientX;
+      y = event.clientY;
+      tracer.classList.add("is-visible");
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        tracer.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        frame = 0;
+      });
+    };
+    const leaveWindow = (event: PointerEvent) => {
+      if (!event.relatedTarget) hide();
+    };
+
+    window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("pointerout", leaveWindow, { passive: true });
+    window.addEventListener("blur", hide);
+    return () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerout", leaveWindow);
+      window.removeEventListener("blur", hide);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [disabled]);
+
+  return <span ref={tracerRef} className={`cursor-tracer${disabled ? " cursor-tracer--disabled" : ""}`} aria-hidden="true" />;
 }
 
 function HeadingIcon({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
@@ -364,12 +402,13 @@ export default function Home() {
   return (
     <div className="site-shell">
       <audio ref={audioRef} src={sirenTrack} loop preload="metadata" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} />
+      <CursorTracer disabled={coarsePointer || reducedMotion} />
       <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
         <Mark />
         <div className="header-actions">
           <button className={`music-toggle ${musicPlaying ? "music-toggle--active" : ""}`} onClick={toggleMusic} aria-pressed={musicPlaying} aria-label={musicPlaying ? "Turn music off" : "Turn music on"}>
-            <span className="music-toggle__icon">{musicPlaying ? <Volume2 size={21} /> : <VolumeX size={21} />}</span>
-            <span className="music-toggle__state">{musicPlaying ? "ON" : "OFF"}</span>
+            <span className="music-toggle__panel" aria-hidden="true"><span className="music-toggle__waveform">{Array.from({ length: 17 }, (_, index) => <i key={index} />)}</span></span>
+            <span className="music-toggle__state">({musicPlaying ? "ON" : "OFF"})</span>
           </button>
           <button className="participant-trigger" onClick={() => openAuthPanel("participant-login")} aria-label={participantTeam ? `Signed in as ${participantTeam.teamName}` : "Open participant login"}>
             <UsersRound size={16} aria-hidden="true" /><span className="header-action__label">{participantTeam ? "TEAM / ON" : "TEAM LOGIN"}</span>
