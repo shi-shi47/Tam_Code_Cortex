@@ -139,3 +139,12 @@
 - [x] Make the showcase cover the footer width responsively and respect reduced-motion preferences.
 - [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
 - [x] Save and deliver the updated checkpoint.
+
+## Mini hardware and full-site grid refinement
+
+- [x] Make the footer breadboard, Arduino UNO, and Raspberry Pi accents very small.
+- [x] Render three breadboards, three Arduino UNO boards, and three Raspberry Pi boards around the Code cortex logo.
+- [x] Add a subtle reference-inspired grid texture across the full website without reducing text contrast.
+- [x] Preserve reduced-motion, responsive, and decorative accessibility behavior.
+- [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
+- [x] Save and deliver the updated checkpoint.

@@ -99,6 +99,10 @@ img { display: block; max-width: 100%; }
 }
 
 .site-shell { overflow: clip; background: var(--navy); }
+.section-dark, .section-light, .section-blue { background-image: linear-gradient(rgba(246,240,220,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(246,240,220,.055) 1px, transparent 1px); background-size: 52px 52px; }
+.menu-panel { background-image: linear-gradient(rgba(16,41,75,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16,41,75,.08) 1px, transparent 1px); background-size: 52px 52px; }
+body { background-color: var(--navy); }
+
 .cursor-tracer { background: var(--cyan); border-radius: 50%; box-shadow: 0 0 0 5px rgba(72,217,255,.14), 0 0 24px rgba(72,217,255,.9); height: 18px; left: 0; opacity: 0; pointer-events: none; position: fixed; top: 0; transform: translate3d(-100px, -100px, 0) translate(-50%, -50%); transition: opacity .16s ease, scale .16s var(--ease-out); width: 18px; will-change: transform; z-index: 80; }
 .cursor-tracer::after { border: 1px solid rgba(72,217,255,.62); border-radius: 50%; content: ""; inset: -10px; position: absolute; }
 .cursor-tracer.is-visible { opacity: 1; }
@@ -464,26 +468,35 @@ img { display: block; max-width: 100%; }
 .stack-showcase__logo-shell { align-items: center; background: radial-gradient(circle, rgba(72,217,255,.28), rgba(7,20,42,.92) 64%); border: 1px solid rgba(72,217,255,.78); border-radius: 50%; box-shadow: 0 0 0 9px rgba(72,217,255,.06), 0 0 60px rgba(72,217,255,.28), inset 0 0 34px rgba(72,217,255,.14); display: flex; height: clamp(260px, 33vw, 430px); justify-content: center; padding: 26px; width: clamp(260px, 33vw, 430px); }
 .stack-showcase__logo-shell img { filter: drop-shadow(0 0 22px rgba(72,217,255,.72)); max-width: 100%; width: 100%; }
 .stack-showcase__core > span { color: rgba(246,240,220,.75); font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-align: center; }
-.stack-device { align-items: center; box-shadow: 0 20px 32px rgba(0,0,0,.38); display: flex; justify-content: center; position: absolute; z-index: 4; }
-.stack-device strong { font-family: var(--mono); font-size: clamp(9px, 1vw, 13px); letter-spacing: .12em; line-height: 1.2; text-align: center; }
-.stack-device--breadboard { animation: stackFloatOne 7.5s ease-in-out infinite; background: #e6dcc2; border: 2px solid #8a7652; border-radius: 8px; color: #10294b; height: clamp(78px, 9vw, 120px); left: 10%; top: 19%; transform: rotate(-9deg); width: clamp(145px, 17vw, 230px); }
-.stack-device__holes { background-image: radial-gradient(circle, rgba(16,41,75,.75) 1.7px, transparent 2.2px); background-size: 13px 13px; inset: 16px; opacity: .55; position: absolute; }
-.stack-device__rail { background: #e96159; height: 3px; left: 15px; position: absolute; right: 15px; }
-.stack-device__rail--top { top: 10px; }
-.stack-device__rail--bottom { background: #48a9df; bottom: 10px; }
-.stack-device--arduino { animation: stackFloatTwo 8.2s ease-in-out infinite; background: linear-gradient(145deg, #2cbb9b, #087f77); border: 2px solid #62f0cc; border-radius: 8px; color: #effff4; height: clamp(70px, 8vw, 108px); right: 9%; top: 15%; transform: rotate(7deg); width: clamp(150px, 18vw, 245px); }
-.stack-device__usb { background: #d5d9d0; border: 2px solid #76877f; border-radius: 3px 0 0 3px; height: 27px; left: -15px; position: absolute; top: 28%; width: 22px; }
-.stack-device__chip { background: #122e48; border: 1px solid rgba(255,255,255,.3); height: 29px; position: absolute; right: 19%; top: 25%; width: 35px; }
-.stack-device--arduino strong { margin-top: 33px; position: relative; }
+.stack-device { align-items: center; box-shadow: 0 8px 15px rgba(0,0,0,.34); display: flex; justify-content: center; position: absolute; z-index: 4; }
+.stack-device strong { font-family: var(--mono); font-size: 6px; letter-spacing: .08em; line-height: 1.1; text-align: center; }
+.stack-device--breadboard { animation: stackFloatOne 7.5s ease-in-out infinite; background: #e6dcc2; border: 1px solid #8a7652; border-radius: 4px; color: #10294b; height: 34px; width: 58px; }
+.stack-device__holes { background-image: radial-gradient(circle, rgba(16,41,75,.75) 1px, transparent 1.4px); background-size: 6px 6px; inset: 7px; opacity: .55; position: absolute; }
+.stack-device__rail { background: #e96159; height: 1px; left: 5px; position: absolute; right: 5px; }
+.stack-device__rail--top { top: 4px; }
+.stack-device__rail--bottom { background: #48a9df; bottom: 4px; }
+.stack-device--arduino { animation: stackFloatTwo 8.2s ease-in-out infinite; background: linear-gradient(145deg, #2cbb9b, #087f77); border: 1px solid #62f0cc; border-radius: 4px; color: #effff4; height: 32px; width: 58px; }
+.stack-device__usb { background: #d5d9d0; border: 1px solid #76877f; border-radius: 2px 0 0 2px; height: 10px; left: -7px; position: absolute; top: 30%; width: 9px; }
+.stack-device__chip { background: #122e48; border: 1px solid rgba(255,255,255,.3); height: 9px; position: absolute; right: 15%; top: 21%; width: 11px; }
+.stack-device--arduino strong { margin-top: 11px; position: relative; }
 .stack-device--arduino b { color: #fff09a; font-weight: 400; }
-.stack-device--raspberry { animation: stackFloatThree 7.9s ease-in-out infinite; background: linear-gradient(145deg, #d85b65, #8e243d); border: 2px solid #ff9e9b; border-radius: 9px; bottom: 13%; color: #fff5e9; height: clamp(90px, 11vw, 140px); left: 13%; transform: rotate(9deg); width: clamp(125px, 14vw, 190px); }
-.stack-device--raspberry .stack-device__chip { background: #20243e; border-color: rgba(255,255,255,.4); height: 33px; left: 24%; right: auto; top: 28%; width: 39px; }
-.stack-device--raspberry .stack-device__chip::after { color: #7fe9ff; content: "RPi"; font-family: var(--mono); font-size: 10px; left: 7px; position: absolute; top: 9px; }
-.stack-device__pin-row { background: repeating-linear-gradient(90deg, #e8cf81 0 4px, transparent 4px 9px); height: 10px; position: absolute; right: 11px; top: 13px; width: 62px; }
-.stack-device--raspberry strong { margin-left: 58px; margin-top: 33px; position: relative; }
-@keyframes stackFloatOne { 0%, 100% { margin-top: 0; } 50% { margin-top: -18px; } }
-@keyframes stackFloatTwo { 0%, 100% { margin-top: 0; } 50% { margin-top: 15px; } }
-@keyframes stackFloatThree { 0%, 100% { margin-top: 0; } 50% { margin-top: -13px; } }
+.stack-device--raspberry { animation: stackFloatThree 7.9s ease-in-out infinite; background: linear-gradient(145deg, #d85b65, #8e243d); border: 1px solid #ff9e9b; border-radius: 4px; color: #fff5e9; height: 38px; width: 52px; }
+.stack-device--raspberry .stack-device__chip { background: #20243e; border-color: rgba(255,255,255,.4); height: 10px; left: 18%; right: auto; top: 21%; width: 12px; }
+.stack-device--raspberry .stack-device__chip::after { color: #7fe9ff; content: "RPi"; font-family: var(--mono); font-size: 4px; left: 2px; position: absolute; top: 2px; }
+.stack-device__pin-row { background: repeating-linear-gradient(90deg, #e8cf81 0 2px, transparent 2px 4px); height: 3px; position: absolute; right: 4px; top: 4px; width: 17px; }
+.stack-device--raspberry strong { font-size: 5px; margin-left: 14px; margin-top: 11px; position: relative; }
+.stack-device--breadboard.stack-device--one { left: 12%; top: 20%; transform: rotate(-9deg); }
+.stack-device--breadboard.stack-device--two { left: 31%; top: 11%; transform: rotate(7deg); }
+.stack-device--breadboard.stack-device--three { right: 10%; top: 74%; transform: rotate(-5deg); }
+.stack-device--arduino.stack-device--one { right: 13%; top: 17%; transform: rotate(7deg); }
+.stack-device--arduino.stack-device--two { right: 31%; top: 72%; transform: rotate(-8deg); }
+.stack-device--arduino.stack-device--three { left: 8%; bottom: 16%; transform: rotate(5deg); }
+.stack-device--raspberry.stack-device--one { left: 12%; bottom: 19%; transform: rotate(9deg); }
+.stack-device--raspberry.stack-device--two { left: 38%; top: 13%; transform: rotate(-7deg); }
+.stack-device--raspberry.stack-device--three { right: 9%; bottom: 17%; transform: rotate(6deg); }
+@keyframes stackFloatOne { 0%, 100% { margin-top: 0; } 50% { margin-top: -8px; } }
+@keyframes stackFloatTwo { 0%, 100% { margin-top: 0; } 50% { margin-top: 7px; } }
+@keyframes stackFloatThree { 0%, 100% { margin-top: 0; } 50% { margin-top: -6px; } }
 @keyframes stackOrbit { to { transform: rotate(360deg); } }
 @keyframes stackOrbitReverse { to { transform: rotate(-360deg); } }
 .footer h2 { color: var(--cream); margin-bottom: 0; margin-top: 60px; }
@@ -685,12 +698,19 @@ img { display: block; max-width: 100%; }
   .stack-showcase__orbit--one { height: 360px; width: 360px; }
   .stack-showcase__orbit--two { height: 240px; width: 240px; }
   .stack-showcase__logo-shell { height: 260px; padding: 17px; width: 260px; }
-  .stack-device--breadboard { left: 4%; top: 17%; width: 142px; }
-  .stack-device--arduino { right: 3%; top: 23%; width: 152px; }
-  .stack-device--raspberry { bottom: 12%; left: 4%; width: 130px; }
-  .stack-device strong { font-size: 8px; }
-  .stack-device__holes { inset: 12px; }
-  .stack-device--raspberry strong { margin-left: 44px; }
+  .stack-device--breadboard, .stack-device--arduino { height: 28px; width: 48px; }
+  .stack-device--raspberry { height: 31px; width: 44px; }
+  .stack-device strong { font-size: 5px; }
+  .stack-device__holes { inset: 5px; }
+  .stack-device--breadboard.stack-device--one { left: 4%; top: 17%; }
+  .stack-device--breadboard.stack-device--two { left: 28%; top: 12%; }
+  .stack-device--breadboard.stack-device--three { right: 4%; top: 75%; }
+  .stack-device--arduino.stack-device--one { right: 4%; top: 20%; }
+  .stack-device--arduino.stack-device--two { right: 29%; top: 73%; }
+  .stack-device--arduino.stack-device--three { left: 4%; bottom: 15%; }
+  .stack-device--raspberry.stack-device--one { left: 5%; bottom: 20%; }
+  .stack-device--raspberry.stack-device--two { left: 36%; top: 13%; }
+  .stack-device--raspberry.stack-device--three { right: 4%; bottom: 17%; }
   .stack-showcase__core > span { font-size: 8px; letter-spacing: .14em; }
   .footer__contact { gap: 13px; padding-top: 0; }
   .footer__contact a { font-size: 13px; }

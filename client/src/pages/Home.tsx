@@ -218,21 +218,32 @@ function StackShowcase() {
       <span className="stack-showcase__caption" aria-hidden="true">BUILD / TEST / SHIP</span>
       <span className="stack-showcase__orbit stack-showcase__orbit--one" aria-hidden="true" />
       <span className="stack-showcase__orbit stack-showcase__orbit--two" aria-hidden="true" />
-      <div className="stack-device stack-device--breadboard" aria-hidden="true">
-        <span className="stack-device__holes" />
-        <span className="stack-device__rail stack-device__rail--top" />
-        <span className="stack-device__rail stack-device__rail--bottom" />
-        <strong>BREADBOARD</strong>
+      <div className="stack-device stack-device--breadboard stack-device--one" aria-hidden="true">
+        <span className="stack-device__holes" /><span className="stack-device__rail stack-device__rail--top" /><span className="stack-device__rail stack-device__rail--bottom" /><strong>BB</strong>
       </div>
-      <div className="stack-device stack-device--arduino" aria-hidden="true">
-        <span className="stack-device__usb" />
-        <span className="stack-device__chip" />
-        <strong>ARDUINO <b>UNO</b></strong>
+      <div className="stack-device stack-device--breadboard stack-device--two" aria-hidden="true">
+        <span className="stack-device__holes" /><span className="stack-device__rail stack-device__rail--top" /><span className="stack-device__rail stack-device__rail--bottom" /><strong>BB</strong>
       </div>
-      <div className="stack-device stack-device--raspberry" aria-hidden="true">
-        <span className="stack-device__chip">RPi</span>
-        <span className="stack-device__pin-row" />
-        <strong>RASPBERRY<br />PI</strong>
+      <div className="stack-device stack-device--breadboard stack-device--three" aria-hidden="true">
+        <span className="stack-device__holes" /><span className="stack-device__rail stack-device__rail--top" /><span className="stack-device__rail stack-device__rail--bottom" /><strong>BB</strong>
+      </div>
+      <div className="stack-device stack-device--arduino stack-device--one" aria-hidden="true">
+        <span className="stack-device__usb" /><span className="stack-device__chip" /><strong>UNO</strong>
+      </div>
+      <div className="stack-device stack-device--arduino stack-device--two" aria-hidden="true">
+        <span className="stack-device__usb" /><span className="stack-device__chip" /><strong>UNO</strong>
+      </div>
+      <div className="stack-device stack-device--arduino stack-device--three" aria-hidden="true">
+        <span className="stack-device__usb" /><span className="stack-device__chip" /><strong>UNO</strong>
+      </div>
+      <div className="stack-device stack-device--raspberry stack-device--one" aria-hidden="true">
+        <span className="stack-device__chip">RPi</span><span className="stack-device__pin-row" /><strong>PI</strong>
+      </div>
+      <div className="stack-device stack-device--raspberry stack-device--two" aria-hidden="true">
+        <span className="stack-device__chip">RPi</span><span className="stack-device__pin-row" /><strong>PI</strong>
+      </div>
+      <div className="stack-device stack-device--raspberry stack-device--three" aria-hidden="true">
+        <span className="stack-device__chip">RPi</span><span className="stack-device__pin-row" /><strong>PI</strong>
       </div>
       <div className="stack-showcase__core">
         <div className="stack-showcase__logo-shell">
