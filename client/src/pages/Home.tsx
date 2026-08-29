@@ -211,6 +211,25 @@ function MascotFallback() {
   return <mesh position={[0, 0, 0]}><icosahedronGeometry args={[1.25, 2]} /><meshStandardMaterial color="#48d9ff" roughness={0.48} metalness={0.28} wireframe /></mesh>;
 }
 
+function TransitionRibbons() {
+  const clubMarks = ["TAM", "THE AIML CLUB", "TAM", "THE AIML CLUB", "TAM", "THE AIML CLUB"];
+  const codeMarks = ["CODE CORTEX", "CODE CORTEX", "CODE CORTEX", "CODE CORTEX"];
+  return (
+    <div className="transition-ribbons" aria-label="TAM The AIML Club and Code Cortex">
+      <div className="transition-ribbon transition-ribbon--upper">
+        <div className="transition-ribbon__track transition-ribbon__track--forward" aria-hidden="true">
+          {clubMarks.map((mark, index) => <span key={`club-${index}`} className={index % 2 === 0 ? "transition-ribbon__mark" : "transition-ribbon__submark"}>{mark}</span>)}
+        </div>
+      </div>
+      <div className="transition-ribbon transition-ribbon--lower">
+        <div className="transition-ribbon__track transition-ribbon__track--reverse" aria-hidden="true">
+          {codeMarks.map((mark, index) => <span key={`code-${index}`} className={index % 2 === 0 ? "transition-ribbon__mark" : "transition-ribbon__submark"}>{mark}</span>)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function StackShowcase() {
   return (
     <div className="stack-showcase" aria-label="Code cortex hardware stack">
@@ -566,6 +585,8 @@ export default function Home() {
             <span className="hero__location">// 30 HOURS / ONE IDEA / ZERO LIMITS</span>
           </div>
         </section>
+
+        <TransitionRibbons />
 
         <section id="about" className="about section-light page-pad" data-reveal>
           <div className="about__intro">

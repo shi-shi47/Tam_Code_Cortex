@@ -99,8 +99,19 @@ img { display: block; max-width: 100%; }
 }
 
 .site-shell { overflow: clip; background: var(--navy); }
-.section-dark, .section-light, .section-blue { background-image: linear-gradient(rgba(246,240,220,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(246,240,220,.055) 1px, transparent 1px); background-size: 52px 52px; }
-.menu-panel { background-image: linear-gradient(rgba(16,41,75,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16,41,75,.08) 1px, transparent 1px); background-size: 52px 52px; }
+.section-dark, .section-light, .section-blue { background-image: linear-gradient(rgba(246,240,220,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(246,240,220,.13) 1px, transparent 1px); background-size: 48px 48px; }
+.menu-panel { background-image: linear-gradient(rgba(16,41,75,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(16,41,75,.14) 1px, transparent 1px); background-size: 48px 48px; }
+.transition-ribbons { background: var(--cream); border-bottom: 1px solid rgba(16,41,75,.6); border-top: 1px solid rgba(16,41,75,.6); color: var(--navy); overflow: hidden; position: relative; z-index: 3; }
+.transition-ribbon { align-items: center; display: flex; height: clamp(42px, 5vw, 66px); overflow: hidden; position: relative; white-space: nowrap; }
+.transition-ribbon--upper { background: var(--cyan); transform: skewX(-4deg); }
+.transition-ribbon--lower { background: var(--coral); margin-top: -1px; transform: skewX(4deg); }
+.transition-ribbon__track { align-items: center; display: inline-flex; flex-shrink: 0; gap: clamp(34px, 6vw, 92px); min-width: max-content; padding: 0 clamp(18px, 4vw, 70px); }
+.transition-ribbon__track--forward { animation: ribbonForward 24s linear infinite; }
+.transition-ribbon__track--reverse { animation: ribbonReverse 22s linear infinite; }
+.transition-ribbon__mark { font-family: var(--display); font-size: clamp(19px, 3vw, 36px); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.transition-ribbon__submark { border-left: 1px solid currentColor; font-family: var(--mono); font-size: clamp(9px, 1.2vw, 13px); letter-spacing: .22em; padding-left: clamp(18px, 3vw, 44px); text-transform: uppercase; }
+@keyframes ribbonForward { from { transform: translateX(-38%); } to { transform: translateX(0); } }
+@keyframes ribbonReverse { from { transform: translateX(0); } to { transform: translateX(-38%); } }
 body { background-color: var(--navy); }
 
 .cursor-tracer { background: var(--cyan); border-radius: 50%; box-shadow: 0 0 0 5px rgba(72,217,255,.14), 0 0 24px rgba(72,217,255,.9); height: 18px; left: 0; opacity: 0; pointer-events: none; position: fixed; top: 0; transform: translate3d(-100px, -100px, 0) translate(-50%, -50%); transition: opacity .16s ease, scale .16s var(--ease-out); width: 18px; will-change: transform; z-index: 80; }
@@ -694,6 +705,10 @@ body { background-color: var(--navy); }
   .footer { min-height: 690px; padding-bottom: 22px; padding-top: 100px; }
   .footer__main { grid-template-columns: 1fr; }
   .stack-showcase { margin-top: 70px; min-height: 480px; }
+  .transition-ribbon { height: 48px; }
+  .transition-ribbon__track { gap: 24px; padding-left: 20px; padding-right: 20px; }
+  .transition-ribbon__mark { font-size: 19px; }
+  .transition-ribbon__submark { font-size: 7px; padding-left: 15px; }
   .stack-showcase__caption { font-size: 8px; left: 22px; top: 22px; }
   .stack-showcase__orbit--one { height: 360px; width: 360px; }
   .stack-showcase__orbit--two { height: 240px; width: 240px; }
@@ -726,7 +741,7 @@ body { background-color: var(--navy); }
   [data-reveal], [data-reveal] .event-card { opacity: 1 !important; translate: 0 0 !important; }
   .heading-with-icon__icon { animation: none !important; transform: none !important; translate: 0 0 !important; }
   .cursor-tracer { display: none !important; }
-  .stack-showcase__orbit, .stack-device { animation: none !important; }
+  .stack-showcase__orbit, .stack-device, .transition-ribbon__track { animation: none !important; }
   .music-toggle--active .music-toggle__waveform i { animation: none !important; }
   .menu-panel--open .menu-panel__nav a, .menu-panel__nav a .menu-panel__item-icon { animation: none !important; }
 }

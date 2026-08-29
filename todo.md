@@ -148,3 +148,13 @@
 - [x] Preserve reduced-motion, responsive, and decorative accessibility behavior.
 - [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
 - [x] Save and deliver the updated checkpoint.
+
+## About transition ribbons and stronger grid refinement
+
+- [x] Add an upper full-width ribbon moving left to right with “TAM — THE AIML CLUB.”
+- [x] Add a lower full-width ribbon moving right to left with “CODE CORTEX.”
+- [x] Place the two ribbons directly above the About section’s “The build starts here” content without overlap.
+- [x] Increase global grid visibility while preserving text contrast and section hierarchy.
+- [x] Preserve responsive and reduced-motion behavior for the ribbons and grid.
+- [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
+- [x] Save and deliver the updated checkpoint.
