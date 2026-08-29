@@ -158,3 +158,13 @@
 - [x] Preserve responsive and reduced-motion behavior for the ribbons and grid.
 - [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
 - [x] Save and deliver the updated checkpoint.
+
+## Menu orientation and clean footer refinement
+
+- [x] Make the fixed MENU label read vertically from top to bottom.
+- [x] Tilt both transition ribbons slightly for a more dynamic silhouette.
+- [x] Flip the menu trapezium so its top side faces left.
+- [x] Remove the floating hardware gadgets from the bottom Code cortex logo showcase.
+- [x] Preserve responsive, keyboard, reduced-motion, and grid behavior.
+- [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
+- [x] Save and deliver the updated checkpoint.
