@@ -211,6 +211,39 @@ function MascotFallback() {
   return <mesh position={[0, 0, 0]}><icosahedronGeometry args={[1.25, 2]} /><meshStandardMaterial color="#48d9ff" roughness={0.48} metalness={0.28} wireframe /></mesh>;
 }
 
+function StackShowcase() {
+  return (
+    <div className="stack-showcase" aria-label="Code cortex hardware stack">
+      <div className="stack-showcase__grid" aria-hidden="true" />
+      <span className="stack-showcase__caption" aria-hidden="true">BUILD / TEST / SHIP</span>
+      <span className="stack-showcase__orbit stack-showcase__orbit--one" aria-hidden="true" />
+      <span className="stack-showcase__orbit stack-showcase__orbit--two" aria-hidden="true" />
+      <div className="stack-device stack-device--breadboard" aria-hidden="true">
+        <span className="stack-device__holes" />
+        <span className="stack-device__rail stack-device__rail--top" />
+        <span className="stack-device__rail stack-device__rail--bottom" />
+        <strong>BREADBOARD</strong>
+      </div>
+      <div className="stack-device stack-device--arduino" aria-hidden="true">
+        <span className="stack-device__usb" />
+        <span className="stack-device__chip" />
+        <strong>ARDUINO <b>UNO</b></strong>
+      </div>
+      <div className="stack-device stack-device--raspberry" aria-hidden="true">
+        <span className="stack-device__chip">RPi</span>
+        <span className="stack-device__pin-row" />
+        <strong>RASPBERRY<br />PI</strong>
+      </div>
+      <div className="stack-showcase__core">
+        <div className="stack-showcase__logo-shell">
+          <img src={codeCortexLogo} alt="Code cortex 3.0" />
+        </div>
+        <span>CODE CORTEX 3.0 / 2026</span>
+      </div>
+    </div>
+  );
+}
+
 function CursorTracer({ disabled }: { disabled: boolean }) {
   const tracerRef = useRef<HTMLSpanElement>(null);
 
@@ -660,7 +693,8 @@ export default function Home() {
       </main>
 
       <footer id="contact" className="footer section-dark page-pad" data-reveal>
-        <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><div className="heading-with-icon"><HeadingIcon icon={Mail} label="Contact" /><h2>Let’s talk<br /><span>tech<span className="footer__cursor">→</span></span></h2></div></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
+        <div className="footer__main"><div className="footer__statement"><SectionLabel number="10">SAY HELLO</SectionLabel><div className="heading-with-icon"><HeadingIcon icon={Mail} label="Contact" /><h2>Let’s explore<br /><span>stack<span className="footer__cursor">→</span></span></h2></div></div><div className="footer__contact"><a href="mailto:varshithisworking@gmail.com"><Mail size={17} /> varshithisworking@gmail.com</a><a href="tel:+919686352426"><Phone size={17} /> +91 96863 52426</a><a href="mailto:reenubiju10@gmail.com"><Mail size={17} /> reenubiju10@gmail.com</a><a href="tel:+919656463672"><Phone size={17} /> +91 96564 63672</a></div></div>
+          <StackShowcase />
           <div className="footer__bottom"><div className="footer__brand-lockup"><Mark compact /><img src={codeCortexLogo} alt="Code cortex 3.0" /></div><div className="footer__socials"><a href="https://www.instagram.com/tam.vit_vellore?igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" aria-label="TAM on Instagram"><Instagram size={20} /></a><a href="https://github.com/Tam" target="_blank" rel="noreferrer" aria-label="TAM on GitHub"><Github size={20} /></a><a href="https://www.linkedin.com/company/tamsystems" target="_blank" rel="noreferrer" aria-label="TAM on LinkedIn"><Linkedin size={20} /></a></div><span className="footer__legal">© 2026 TAM-VIT / BUILT WITH TOO MUCH COFFEE</span></div>
       </footer>
     </div>

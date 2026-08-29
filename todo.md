@@ -129,3 +129,13 @@
 - [x] Restyle the fixed mid-right menu as an upside-down trapezium with vertically inverted MENU lettering.
 - [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
 - [x] Save and deliver the updated checkpoint.
+
+## Footer stack showcase refinement
+
+- [x] Enlarge the desktop blue cursor tracer while keeping it subtle and hidden on coarse pointers.
+- [x] Replace the footer line “LET’S TALK TECH” with “LET’S EXPLORE STACK.”
+- [x] Add a large highlighted Code cortex logo showcase before the social links.
+- [x] Add animated floating breadboard, Arduino UNO, and Raspberry Pi decorative elements around the logo.
+- [x] Make the showcase cover the footer width responsively and respect reduced-motion preferences.
+- [x] Run tests, typecheck, production build, and desktop/mobile visual verification.
+- [x] Save and deliver the updated checkpoint.
